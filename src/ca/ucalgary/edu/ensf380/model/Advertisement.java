@@ -1,28 +1,38 @@
 public class Advertisement {
-    private String text;
-    private String imagePath;
+    private int id;
+    private String mediaType;
+    private String mediaPath;
     private int displayDuration;
 
-    public Advertisement(String text, String imagePath, int displayDuration) {
-        this.text = text;
-        this.imagePath = imagePath;
+    public Advertisement(int id, String mediaType, String mediaPath, int displayDuration) {
+        this.id = id;
+        this.mediaType = mediaType;
+        this.mediaPath = mediaPath;
         this.displayDuration = displayDuration;
     }
 
-    public String getText() {
-        return text;
+    public int getId() {
+        return id;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getMediaType() {
+        return mediaType;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
+
+    public String getMediaPath() {
+        return mediaPath;
+    }
+
+    public void setMediaPath(String mediaPath) {
+        this.mediaPath = mediaPath;
     }
 
     public int getDisplayDuration() {

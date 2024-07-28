@@ -1,25 +1,32 @@
-public class WeatherData {
-    private String temperature;
-    private String condition;
+package ca.ucalgary.edu.ensf380.model;
 
-    public WeatherData(String temperature, String condition) {
+public class WeatherData {
+    private double temperature;
+    private String conditions;
+
+    public WeatherData(double temperature, String conditions) {
         this.temperature = temperature;
-        this.condition = condition;
+        this.conditions = conditions;
     }
 
-    public String getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 
-    public String getCondition() {
-        return condition;
+    public String getConditions() {
+        return conditions;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
+    public void setConditions(String conditions) {
+        this.conditions = conditions;
+    }
+
+    @Override
+    public String toString() {
+        return "Temperature: " + temperature + "°C, Conditions: " + conditions;
     }
 }

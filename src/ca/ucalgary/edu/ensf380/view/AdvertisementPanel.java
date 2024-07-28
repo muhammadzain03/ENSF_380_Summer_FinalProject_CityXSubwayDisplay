@@ -1,11 +1,15 @@
-package ca.ucalgary.edu.ensf380.subway.view;
-
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
 
 public class AdvertisementPanel extends JPanel {
     public AdvertisementPanel() {
-        setBackground(Color.LIGHT_GRAY);
-        add(new JLabel("Advertisement Panel"));
+        // Initialization code
+    }
+
+    public void displayAdvertisement(Advertisement ad) {
+        // Code to display advertisement
+    }
+
+    public void cycleAdvertisements() {
+        // Code to cycle through advertisements
     }
 }

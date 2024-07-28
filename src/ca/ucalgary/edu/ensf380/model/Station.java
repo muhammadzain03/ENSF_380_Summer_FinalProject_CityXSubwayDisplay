@@ -1,17 +1,35 @@
-package ca.ucalgary.edu.ensf380.subway.model;
-
 public class Station {
     private String name;
-    private String lineCode;
+    private String code;
+    private String coordinates;
 
-    public Station(String name, String lineCode) {
+    public Station(String name, String code, String coordinates) {
         this.name = name;
-        this.lineCode = lineCode;
+        this.code = code;
+        this.coordinates = coordinates;
     }
 
-    // Getters and setters
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getLineCode() { return lineCode; }
-    public void setLineCode(String lineCode) { this.lineCode = lineCode; }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
+    }
 }

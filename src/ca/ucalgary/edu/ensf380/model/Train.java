@@ -1,21 +1,35 @@
-package ca.ucalgary.edu.ensf380.subway.model;
-
 public class Train {
-    private String id;
-    private String currentStation;
-    private String direction;
+    private String position;
+    private SubwayLine line;
+    private String status;
 
-    public Train(String id, String currentStation, String direction) {
-        this.id = id;
-        this.currentStation = currentStation;
-        this.direction = direction;
+    public Train(String position, SubwayLine line, String status) {
+        this.position = position;
+        this.line = line;
+        this.status = status;
     }
 
-    // Getters and setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-    public String getCurrentStation() { return currentStation; }
-    public void setCurrentStation(String currentStation) { this.currentStation = currentStation; }
-    public String getDirection() { return direction; }
-    public void setDirection(String direction) { this.direction = direction; }
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public SubwayLine getLine() {
+        return line;
+    }
+
+    public void setLine(SubwayLine line) {
+        this.line = line;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

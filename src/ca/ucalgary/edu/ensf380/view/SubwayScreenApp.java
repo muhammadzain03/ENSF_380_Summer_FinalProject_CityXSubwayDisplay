@@ -1,78 +1,112 @@
-package ca.ucalgary.edu.ensf380.subway.view;
-
-import ca.ucalgary.edu.ensf380.subway.controller.SimulatorController;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class SubwayScreenApp extends JFrame {
-    private static final long serialVersionUID = 1L;
-    private SimulatorController simulatorController;
     private AdvertisementPanel adPanel;
-    private WeatherPanel weatherPanel;
     private NewsPanel newsPanel;
-    private TrainInfoPanel trainInfoPanel;
+    private WeatherPanel weatherPanel;
+    private TrainInfo trainInfoPanel;
+    private AdvertisementController adController;
+    private NewsController newsController;
+    private WeatherController weatherController;
+    private SimulatorController simulatorController;
 
     public SubwayScreenApp() {
-        setTitle("Subway Screen");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Subway Screen App");
         setSize(800, 600);
-        setLayout(new GridBagLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
 
+        initializeControllers();
+        initializePanels();
+        setupLayout();
+
+        // Start background tasks
+        startBackgroundTasks();
+    }
+
+    private void initializeControllers() {
+        adController = new AdvertisementController();
+        newsController = new NewsController();
+        weatherController = new WeatherController();
         simulatorController = new SimulatorController();
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                simulatorController.shutdown();
-            }
-        });
-
-        initComponents();
-        layoutComponents();
-
-        simulatorController.startSimulator();
     }
 
-    private void initComponents() {
+    private void initializePanels() {
         adPanel = new AdvertisementPanel();
-        weatherPanel = new WeatherPanel();
         newsPanel = new NewsPanel();
-        trainInfoPanel = new TrainInfoPanel();
+        weatherPanel = new WeatherPanel();
+        trainInfoPanel = new TrainInfo();
     }
 
-    private void layoutComponents() {
-        GridBagConstraints gbc = new GridBagConstraints();
-        
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 3;
-        gbc.gridheight = 2;
-        gbc.weightx = 0.75;
-        gbc.weighty = 0.75;
-        gbc.fill = GridBagConstraints.BOTH;
-        add(adPanel, gbc);
+    private void setupLayout() {
+        // Main panel layout setup
+        JPanel mainPanel = new JPanel(new BorderLayout());
 
-        gbc.gridx = 3;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 0.25;
-        gbc.weighty = 0.25;
-        add(weatherPanel, gbc);
+        // Advertisement Panel (largest section)
+        mainPanel.add(adPanel, BorderLayout.CENTER);
 
-        gbc.gridy = 1;
-        add(newsPanel, gbc);
+        // Weather Panel (top right corner)
+        JPanel topRightPanel = new JPanel(new BorderLayout());
+        topRightPanel.add(weatherPanel, BorderLayout.NORTH);
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 4;
-        gbc.gridheight = 1;
-        gbc.weightx = 1.0;
-        gbc.weighty = 0.25;
-        add(trainInfoPanel, gbc);
+        // News Panel (below weather panel)
+        topRightPanel.add(newsPanel, BorderLayout.SOUTH);
+
+        mainPanel.add(topRightPanel, BorderLayout.EAST);
+
+        // Train Info Panel (bottom section)
+        mainPanel.add(trainInfoPanel, BorderLayout.SOUTH);
+
+        add(mainPanel);
+    }
+
+    private void startBackgroundTasks() {
+        // Run tasks in separate threads to keep UI responsive
+
+        // Load advertisements
+        new Thread(() -> {
+            try {
+                adController.loadAds();
+                adPanel.cycleAdvertisements();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        // Fetch news
+        new Thread(() -> {
+            try {
+                newsController.fetchNews();
+                newsPanel.updateNews(/* pass news articles here */);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        // Retrieve weather information
+        new Thread(() -> {
+            try {
+                weatherController.retrieveWeather();
+                weatherPanel.updateWeather(/* pass weather data here */);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        // Simulate train positions
+        new Thread(() -> {
+            try {
+                while (true) {
+                    simulatorController.simulate();
+                    trainInfoPanel.updateTrainPositions();
+                    Thread.sleep(15000); // Update every 15 seconds
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     public static void main(String[] args) {

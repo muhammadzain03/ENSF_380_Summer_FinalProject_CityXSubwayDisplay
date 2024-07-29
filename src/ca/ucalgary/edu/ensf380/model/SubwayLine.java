@@ -1,3 +1,5 @@
+package ca.ucalgary.edu.ensf380.model;
+
 import java.util.ArrayList;
 import java.util.List;
 

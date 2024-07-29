@@ -1,3 +1,5 @@
+package ca.ucalgary.edu.ensf380.model;
+
 public class NewsArticle {
     private String title;
     private String source;

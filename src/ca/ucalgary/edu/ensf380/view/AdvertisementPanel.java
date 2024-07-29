@@ -1,5 +1,9 @@
+package ca.ucalgary.edu.ensf380.view;
+
+import ca.ucalgary.edu.ensf380.model.Advertisement;
+
 import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,11 +36,11 @@ public class AdvertisementPanel extends JPanel {
         adLabel.setText("Displaying Subway Map");
     }
 
-    public void startAdRotation() {
+    private void startAdRotation() {
         if (timer != null) {
             timer.cancel();
         }
-        
+
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override

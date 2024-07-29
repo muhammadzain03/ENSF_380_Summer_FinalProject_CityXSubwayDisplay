@@ -1,3 +1,5 @@
+package ca.ucalgary.edu.ensf380.controller;
+
 public class NewsController {
     public NewsController() {
         // Initialization code

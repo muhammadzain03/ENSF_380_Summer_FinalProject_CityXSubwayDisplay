@@ -1,3 +1,5 @@
+package ca.ucalgary.edu.ensf380.model;
+
 public class Train {
     private String position;
     private SubwayLine line;

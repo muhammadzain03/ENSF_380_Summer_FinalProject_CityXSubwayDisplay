@@ -1,3 +1,5 @@
+package ca.ucalgary.edu.ensf380.util;
+
 import java.io.IOException;
 import java.util.List;
 

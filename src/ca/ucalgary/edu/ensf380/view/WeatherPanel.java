@@ -4,17 +4,17 @@ import ca.ucalgary.edu.ensf380.controller.WeatherController;
 import ca.ucalgary.edu.ensf380.model.WeatherData;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
 
 public class WeatherPanel extends JPanel {
     private JLabel weatherLabel;
     private WeatherController weatherController;
 
-    public WeatherPanel(double latitude, double longitude) {
+    public WeatherPanel() {
         setLayout(new BorderLayout());
         weatherLabel = new JLabel("Loading weather data...", SwingConstants.CENTER);
         add(weatherLabel, BorderLayout.CENTER);
-        weatherController = new WeatherController(latitude, longitude);
+        weatherController = new WeatherController();
         updateWeather();
     }
 

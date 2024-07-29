@@ -1,3 +1,5 @@
+package ca.ucalgary.edu.ensf380.util;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,8 +9,8 @@ import java.sql.Statement;
 public class DatabaseUtil {
     private Connection connection;
     private static final String URL = "jdbc:mysql://localhost:3306/subway_screen";
-    private static final String USER = "root"; // MySQL username
-    private static final String PASSWORD = "Qwerty$455"; // MySQL password
+    private static final String USER = "root"; // replace with your MySQL username
+    private static final String PASSWORD = "password"; // replace with your MySQL password
 
     public DatabaseUtil() {
         // Initialization code

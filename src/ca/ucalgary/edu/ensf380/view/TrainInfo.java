@@ -1,3 +1,5 @@
+package ca.ucalgary.edu.ensf380.view;
+
 import javax.swing.JPanel;
 
 public class TrainInfo extends JPanel {

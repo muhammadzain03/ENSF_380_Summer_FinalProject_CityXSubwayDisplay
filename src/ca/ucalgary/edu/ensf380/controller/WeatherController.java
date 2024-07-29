@@ -7,12 +7,8 @@ import java.io.IOException;
 
 public class WeatherController {
     private WeatherData weatherData;
-    private double latitude;
-    private double longitude;
 
-    public WeatherController(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public WeatherController() {
         updateWeatherData();
     }
 
@@ -22,7 +18,7 @@ public class WeatherController {
 
     public void updateWeatherData() {
         try {
-            this.weatherData = APIClient.fetchWeather(latitude, longitude);
+            this.weatherData = APIClient.fetchWeather();
         } catch (IOException e) {
             e.printStackTrace();
         }

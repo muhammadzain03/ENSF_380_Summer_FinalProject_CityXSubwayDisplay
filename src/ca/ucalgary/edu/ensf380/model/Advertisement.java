@@ -1,3 +1,5 @@
+package ca.ucalgary.edu.ensf380.model;
+
 public class Advertisement {
     private int id;
     private String mediaType;

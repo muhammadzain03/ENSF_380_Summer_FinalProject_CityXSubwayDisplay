@@ -10,12 +10,10 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class APIClient {
-    private static final String API_KEY = "fd3f2c309dbd9b8ecf2e73c371f0a514"; // Your actual API key
-    private static final String API_URL_TEMPLATE = "https://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&appid=%s&units=metric";
+    private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather?lat=51.0460954&lon=-114.065465&appid=95bcd8203125543276775f959ad178fd&units=metric";
 
-    public static WeatherData fetchWeather(double latitude, double longitude) throws IOException {
-        String apiUrl = String.format(API_URL_TEMPLATE, latitude, longitude, API_KEY);
-        URL url = new URL(apiUrl);
+    public static WeatherData fetchWeather() throws IOException {
+        URL url = new URL(API_URL);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.connect();

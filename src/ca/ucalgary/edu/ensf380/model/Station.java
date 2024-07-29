@@ -1,3 +1,5 @@
+package ca.ucalgary.edu.ensf380.model;
+
 public class Station {
     private String name;
     private String code;

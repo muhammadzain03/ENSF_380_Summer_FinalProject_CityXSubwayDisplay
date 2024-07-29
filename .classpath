@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="src/ca/ucalgary/edu/ensf380/controller"/>
-	<classpathentry kind="src" path="src/ca/ucalgary/edu/ensf380/model"/>
-	<classpathentry kind="src" path="src/ca/ucalgary/edu/ensf380/util"/>
-	<classpathentry kind="src" path="src/ca/ucalgary/edu/ensf380/view"/>
-	<classpathentry kind="lib" path="Simulator/SubwaySimulator.jar"/>
-	<classpathentry kind="output" path="bin"/>
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+    <classpathentry kind="src" path="src"/>
+    <classpathentry kind="lib" path="Simulator/SubwaySimulator.jar"/>
+    <classpathentry kind="output" path="bin"/>
 </classpath>

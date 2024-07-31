@@ -1,19 +1,19 @@
 package ca.ucalgary.edu.ensf380.model;
 
 public class WeatherData {
-    private double temperature;
+    private String temperature;
     private String conditions;
 
-    public WeatherData(double temperature, String conditions) {
+    public WeatherData(String temperature, String conditions) {
         this.temperature = temperature;
         this.conditions = conditions;
     }
 
-    public double getTemperature() {
+    public String getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(double temperature) {
+    public void setTemperature(String temperature) {
         this.temperature = temperature;
     }
 
@@ -27,6 +27,6 @@ public class WeatherData {
 
     @Override
     public String toString() {
-        return "Temperature: " + temperature + "°C, Conditions: " + conditions;
+        return "Temperature: " + temperature + ", Conditions: " + conditions;
     }
 }

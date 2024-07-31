@@ -1,6 +1,7 @@
 package ca.ucalgary.edu.ensf380.view;
 
 import ca.ucalgary.edu.ensf380.controller.AdvertisementController;
+import ca.ucalgary.edu.ensf380.view.AdvertisementPanel;
 import ca.ucalgary.edu.ensf380.view.WeatherPanel;
 
 import javax.swing.*;

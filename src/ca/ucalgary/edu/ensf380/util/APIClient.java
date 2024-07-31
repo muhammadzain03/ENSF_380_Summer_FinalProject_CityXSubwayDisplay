@@ -1,42 +1,53 @@
 package ca.ucalgary.edu.ensf380.util;
 
 import ca.ucalgary.edu.ensf380.model.WeatherData;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
+// Imported necessary classes for handling I/O, HTTP connections, and regular expressions.
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class APIClient {
-    private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather?lat=51.0460954&lon=-114.065465&appid=95bcd8203125543276775f959ad178fd&units=metric";
 
-    public static WeatherData fetchWeather() throws IOException {
-        URL url = new URL(API_URL);
+    // Static: Meaning, it can be called without creating an instance of "APIClient".
+    public static Object fetch(String urlString) throws IOException, APIException {
+        StringBuilder result = new StringBuilder();     // A StringBuilder named "result" is used to store the fetched HTML data.
+        URL url = new URL(urlString);                   // A URL object is created with the provided URL string.
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.connect();
+        conn.setRequestMethod("GET");           // An HttpURLConnection is opened to the URL, and the request method is set to GET.
 
-        int responseCode = conn.getResponseCode();
-        if (responseCode != 200) {
-            throw new RuntimeException("HttpResponseCode: " + responseCode);
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {    // A BufferedReader reads the input stream from the connection 
+            String line;                                                                                    // line by line, appending each line to the result.
+            while ((line = reader.readLine()) != null) {
+                result.append(line);
+            }
         }
 
-        String inline = "";
-        Scanner scanner = new Scanner(url.openStream());
+        // Use regex to parse weather description from HTML                             // Two "Pattern" objects are created to match the temperature and conditions in the HTML.
+        Pattern temperaturePattern = Pattern.compile("Temperature:\\s*(\\S+)");
+        Pattern conditionsPattern = Pattern.compile("Conditions:\\s*(\\S+)");
 
-        while (scanner.hasNext()) {
-            inline += scanner.nextLine();
+        Matcher temperatureMatcher = temperaturePattern.matcher(result.toString());     // "Matcher" objects are created to find these patterns in the fetched HTML data.
+        Matcher conditionsMatcher = conditionsPattern.matcher(result.toString());
+
+        String temperature = "N/A";         // Default values for temperature and conditions are set to "N/A".
+        String conditions = "N/A";
+
+        if (temperatureMatcher.find()) {
+            temperature = temperatureMatcher.group(1);
         }
 
-        scanner.close();
+        if (conditionsMatcher.find()) {
+            conditions = conditionsMatcher.group(1);
+        }
 
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode root = mapper.readTree(inline);
-
-        double temperature = root.path("main").path("temp").asDouble();
-        String conditions = root.path("weather").get(0).path("description").asText();
+        if (temperature.equals("N/A") && conditions.equals("N/A")) {
+            throw new APIException("Failed to fetch weather data");
+        }
 
         return new WeatherData(temperature, conditions);
     }

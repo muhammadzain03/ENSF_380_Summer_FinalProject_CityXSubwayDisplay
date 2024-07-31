@@ -1,5 +1,7 @@
 package ca.ucalgary.edu.ensf380.controller;
 
+import ca.ucalgary.edu.ensf380.util.APIException;
+
 public class NewsController {
     public NewsController() {
         // Initialization code

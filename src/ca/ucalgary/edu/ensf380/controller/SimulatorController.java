@@ -3,6 +3,8 @@ package ca.ucalgary.edu.ensf380.controller;
 import java.io.IOException;
 import java.util.List;
 
+import ca.ucalgary.edu.ensf380.model.Train;
+
 public class SimulatorController {
     public SimulatorController() {
         // Initialization code

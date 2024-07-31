@@ -10,3 +10,10 @@ A Java program that models the movement of 12 trains on 3 subway lines. Here's a
 ## How to run?
 
 java -jar .\exe\SubwaySimulator.jar --in "..\data\subway.csv" --out "..\out"
+
+# ==============================================================================================================
+# Absolute Path Verification:
+
+    To troubleshoot, try using an absolute path instead of a relative one to ensure the program can find the file. For example:
+
+        java -jar .\exe\SubwaySimulator.jar --in "C:\Zain\University of Calgary\Summer 2024\ENSF-380 - Object Oriented Principles for Software Development\Final Project\SubwayScreen\data\subway.csv" --out "C:\Zain\University of Calgary\Summer 2024\ENSF-380 - Object Oriented Principles for Software Development\Final Project\SubwayScreen\out"

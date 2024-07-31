@@ -1,9 +1,16 @@
 package ca.ucalgary.edu.ensf380.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubwayLine {
     private List<Station> stations;
+    private String name;
+
+    public SubwayLine(String name) {
+        this.name = name;
+        this.stations = new ArrayList<>(); // Initialize the stations list
+    }
 
     public SubwayLine(List<Station> stations) {
         this.stations = stations;
@@ -24,5 +31,13 @@ public class SubwayLine {
             }
         }
         return null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

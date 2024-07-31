@@ -2,6 +2,6 @@
 <classpath>
     <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
     <classpathentry kind="src" path="src"/>
-    <classpathentry kind="lib" path="Simulator/SubwaySimulator.jar"/>
+    <classpathentry kind="lib" path="exe/SubwaySimulator.jar"/>
     <classpathentry kind="output" path="bin"/>
 </classpath>

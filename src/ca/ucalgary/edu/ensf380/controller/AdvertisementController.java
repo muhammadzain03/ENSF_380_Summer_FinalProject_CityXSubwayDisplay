@@ -17,25 +17,28 @@ public class AdvertisementController {
     private Timer timer;
     private AdvertisementPanel advertisementPanel;
 
+    // Constructor to initialize the AdvertisementController
     public AdvertisementController(AdvertisementPanel advertisementPanel) {
         this.advertisementPanel = advertisementPanel;
         try {
-            this.advertisements = loadAds();
+            this.advertisements = loadAds(); // Load advertisements from the database
         } catch (Exception e) {
             e.printStackTrace();
         }
-        startAdRotation();
+        startAdRotation(); // Start rotating the advertisements
     }
 
+    // Method to load advertisements from the database
     public List<Advertisement> loadAds() throws SQLException {
         List<Advertisement> ads = new ArrayList<>();
         String query = "SELECT * FROM advertisements";
         DatabaseUtil dbUtil = new DatabaseUtil();
 
         try {
-            dbUtil.connect();
+            dbUtil.connect(); // Connect to the database
             ResultSet resultSet = dbUtil.query(query);
 
+            // Iterate through the result set and create Advertisement objects
             while (resultSet.next()) {
                 Advertisement ad = new Advertisement(
                     resultSet.getInt("id"),
@@ -43,14 +46,15 @@ public class AdvertisementController {
                     resultSet.getString("media_path"),
                     resultSet.getInt("display_duration")
                 );
-                ads.add(ad);
+                ads.add(ad); // Add the advertisement to the list
             }
         } finally {
-            dbUtil.close();
+            dbUtil.close(); // Close the database connection
         }
-        return ads;
+        return ads; // Return the list of advertisements
     }
 
+    // Method to start rotating advertisements
     private void startAdRotation() {
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -58,19 +62,20 @@ public class AdvertisementController {
             public void run() {
                 if (currentAdIndex < advertisements.size()) {
                     Advertisement ad = advertisements.get(currentAdIndex);
-                    advertisementPanel.displayAdvertisement(ad);
+                    advertisementPanel.displayAdvertisement(ad); // Display the current advertisement
                     currentAdIndex++;
                 } else {
-                    advertisementPanel.displayMap();
+                    advertisementPanel.displayMap(); // Display the map every 10 seconds for 5 seconds
                     currentAdIndex = 0;
                 }
             }
         }, 0, 10000); // Rotate ads every 10 seconds
     }
 
+    // Method to stop the advertisement rotation
     public void stopAdRotation() {
         if (timer != null) {
-            timer.cancel();
+            timer.cancel(); // Cancel the timer
         }
     }
 }

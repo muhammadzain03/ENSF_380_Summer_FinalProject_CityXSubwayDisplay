@@ -19,16 +19,9 @@ public class AdvertisementPanel extends JPanel {
 
     // Constructor to initialize the AdvertisementPanel
     public AdvertisementPanel() {
-<<<<<<< HEAD
         setLayout(new BorderLayout()); // Set the layout to BorderLayout
         adLabel = new JLabel("", SwingConstants.CENTER); // Initialize the advertisement label
         add(adLabel, BorderLayout.CENTER); // Add the label to the center of the panel
-=======
-        setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(600, 400));
-        adLabel = new JLabel("Loading Ad...", SwingConstants.CENTER);
-        add(adLabel, BorderLayout.CENTER);
->>>>>>> 930367dd8390d2b378b800be5df74b4e22f1e23c
     }
 
     // Method to set the list of advertisements

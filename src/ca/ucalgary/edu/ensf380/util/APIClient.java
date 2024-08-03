@@ -1,6 +1,6 @@
 package ca.ucalgary.edu.ensf380.util;
 
-import ca.ucalgary.edu.ensf380.model.WeatherData;
+
 import ca.ucalgary.edu.ensf380.model.NewsArticle;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +36,7 @@ public class APIClient {
         if (urlString.contains("newsapi.org")) {
             return parseNews(result.toString());
         } else {
-            return parseWeather(result.toString());
+            return 0;//parseWeather(result.toString());
         }
     }
 
@@ -54,24 +54,4 @@ public class APIClient {
         return articles;
     }
 
-    private static WeatherData parseWeather(String htmlResponse) {
-        Pattern temperaturePattern = Pattern.compile("Temperature:\\s*(\\S+)");
-        Pattern conditionsPattern = Pattern.compile("Conditions:\\s*(\\S+)");
-        
-        Matcher temperatureMatcher = temperaturePattern.matcher(htmlResponse);
-        Matcher conditionsMatcher = conditionsPattern.matcher(htmlResponse);
-        
-        String temperature = "N/A";
-        String conditions = "N/A";
-        
-        if (temperatureMatcher.find()) {
-            temperature = temperatureMatcher.group(1);
-        }
-        
-        if (conditionsMatcher.find()) {
-            conditions = conditionsMatcher.group(1);
-        }
-        
-        return new WeatherData(temperature, conditions);
-    }
 }

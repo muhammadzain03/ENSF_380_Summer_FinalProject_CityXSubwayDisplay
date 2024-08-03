@@ -11,10 +11,13 @@ public class TrainInfo extends JPanel {
     private JTextArea trainInfoArea;
 
     public TrainInfo() {
-        setLayout(new BorderLayout());
+    	setLayout(new GridLayout(1, 5));
+    	setPreferredSize(new Dimension(800, 100));
         trainInfoArea = new JTextArea();
         trainInfoArea.setEditable(false);
-        add(new JScrollPane(trainInfoArea), BorderLayout.CENTER);
+        for (int i = 0; i < 5; i++) {
+            add(new JLabel("Next stations: Fetching..."));
+        }
     }
 
     public void updateTrainPositions(List<Train> trains) {

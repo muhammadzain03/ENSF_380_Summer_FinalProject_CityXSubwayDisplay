@@ -1,4 +1,4 @@
-package ca.ucalgary.edu.ensf380.view;
+ package ca.ucalgary.edu.ensf380.view;
 
 public class SubwayScreenApp {
     public static void main(String[] args) {

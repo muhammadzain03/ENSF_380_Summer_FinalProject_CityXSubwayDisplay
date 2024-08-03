@@ -7,19 +7,23 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsPanel extends JPanel implements Runnable {
+public class NewsPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private List<NewsArticle> articles;
     private JLabel newsLabel;
-    private int x;
+    private Timer timer;
+
 
     public NewsPanel() {
         this.articles = new ArrayList<>();
         setLayout(new BorderLayout());
-        newsLabel = new JLabel("Loading news...");
+        setPreferredSize(new Dimension(800, 50));
+        newsLabel = new JLabel("Loading news...asasaddsasdjha bsadas kjsdjk basjk sbadjh hjlsadl sabdhjas db sahjld", SwingConstants.CENTER);
+        newsLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         add(newsLabel, BorderLayout.CENTER);
-        x = getWidth();
-        new Thread(this).start();
+        
+        timer = new Timer(100, e -> scrollNews());
+        timer.start();
     }
 
     public void updateNews(NewsArticle news) {
@@ -30,22 +34,10 @@ public class NewsPanel extends JPanel implements Runnable {
         }
         newsLabel.setText(newsText.toString());
     }
-
-    @Override
-    public void run() {
-        while (true) {
-            try {
-                SwingUtilities.invokeLater(() -> {
-                    x -= 5;
-                    if (x + newsLabel.getPreferredSize().width < 0) {
-                        x = getWidth();
-                    }
-                    newsLabel.setLocation(x, newsLabel.getY());
-                });
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    
+    private void scrollNews() {
+        String text = newsLabel.getText();
+        newsLabel.setText(text.substring(1) + text.charAt(0));
     }
+
 }

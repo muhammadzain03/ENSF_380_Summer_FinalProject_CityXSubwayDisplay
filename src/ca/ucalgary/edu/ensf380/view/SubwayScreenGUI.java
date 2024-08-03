@@ -3,6 +3,10 @@ package ca.ucalgary.edu.ensf380.view;
 import ca.ucalgary.edu.ensf380.controller.AdvertisementController;
 import ca.ucalgary.edu.ensf380.controller.WeatherController;
 import ca.ucalgary.edu.ensf380.controller.NewsController;
+import ca.ucalgary.edu.ensf380.view.AdvertisementPanel;
+import ca.ucalgary.edu.ensf380.view.WeatherPanel;
+import ca.ucalgary.edu.ensf380.view.NewsPanel;
+import ca.ucalgary.edu.ensf380.view.TrainInfo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,15 +28,12 @@ public class SubwayScreenGUI extends JFrame {
         mainPanel.add(advertisementPanel, BorderLayout.CENTER);
         mainPanel.add(weatherPanel, BorderLayout.EAST);
         
-        
         JPanel bottomPanel = new JPanel(new GridLayout(2, 1));
         add(bottomPanel, BorderLayout.SOUTH);
 
         bottomPanel.add(newsPanel);    
         bottomPanel.add(trainInfoPanel);
         
-
-
         new AdvertisementController(advertisementPanel);
         new WeatherController(weatherPanel).retrieveWeather();
         new NewsController(newsPanel).fetchNews("train");
@@ -42,3 +43,4 @@ public class SubwayScreenGUI extends JFrame {
         setVisible(true);
     }
 }
+

@@ -17,7 +17,8 @@ public class AdvertisementPanel extends JPanel {
 
     public AdvertisementPanel() {
         setLayout(new BorderLayout());
-        adLabel = new JLabel("", SwingConstants.CENTER);
+        setPreferredSize(new Dimension(600, 400));
+        adLabel = new JLabel("Loading Ad...", SwingConstants.CENTER);
         add(adLabel, BorderLayout.CENTER);
     }
 

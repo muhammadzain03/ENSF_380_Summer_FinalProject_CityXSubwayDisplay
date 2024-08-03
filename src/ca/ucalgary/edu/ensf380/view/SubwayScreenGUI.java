@@ -17,17 +17,27 @@ public class SubwayScreenGUI extends JFrame {
         WeatherPanel weatherPanel = new WeatherPanel();
         NewsPanel newsPanel = new NewsPanel();
         TrainInfo trainInfoPanel = new TrainInfo();
+        
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        add(mainPanel, BorderLayout.CENTER);
+        
+        mainPanel.add(advertisementPanel, BorderLayout.CENTER);
+        mainPanel.add(weatherPanel, BorderLayout.EAST);
+        
+        
+        JPanel bottomPanel = new JPanel(new GridLayout(2, 1));
+        add(bottomPanel, BorderLayout.SOUTH);
 
-        add(advertisementPanel, BorderLayout.CENTER);
-        add(weatherPanel, BorderLayout.NORTH);
-        add(newsPanel, BorderLayout.SOUTH);
-        add(trainInfoPanel, BorderLayout.EAST);
+        bottomPanel.add(newsPanel);    
+        bottomPanel.add(trainInfoPanel);
+        
+
 
         new AdvertisementController(advertisementPanel);
         new WeatherController(weatherPanel).retrieveWeather();
         new NewsController(newsPanel).fetchNews("train");
 
-        setSize(800, 600);
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }

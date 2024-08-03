@@ -1,6 +1,8 @@
 package ca.ucalgary.edu.ensf380.view;
 
 import ca.ucalgary.edu.ensf380.model.WeatherData;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,16 +14,23 @@ public class WeatherPanel extends JPanel {
 
     public WeatherPanel() {
         weatherLabel = new JLabel("Loading weather data...");
-        timeLabel = new JLabel("Loading time...");
+        timeLabel = new JLabel("Loading time...",SwingConstants.CENTER);
         setLayout(new GridLayout(2, 1));
-        add(weatherLabel);
+        setPreferredSize(new Dimension(200, 400));
+        
         add(timeLabel);
-
+        add(weatherLabel);
+        
         // Update time every second
-        Timer timer = new Timer(1000, e -> {
-            timeLabel.setText("Time: " + java.time.LocalTime.now().toString());
-        });
-        timer.start();
+        new Timer(1000, e -> updateTime()).start();
+        
+    }
+    
+    private void updateTime() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        timeLabel.setText(now.format(formatter));
+        timeLabel.setFont(new Font("Arial", Font.PLAIN, 20));
     }
 
     public void setWeatherData(WeatherData weatherData) {

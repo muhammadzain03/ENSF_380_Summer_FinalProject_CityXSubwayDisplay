@@ -21,17 +21,17 @@ public class AdvertisementController {
         this.advertisementPanel = advertisementPanel;
         try {
             this.advertisements = loadAds();
-        } catch (AdNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         startAdRotation();
     }
 
-    public List<Advertisement> loadAds() throws AdNotFoundException {
+    public List<Advertisement> loadAds() throws SQLException {
         List<Advertisement> ads = new ArrayList<>();
         String query = "SELECT * FROM advertisements";
         DatabaseUtil dbUtil = new DatabaseUtil();
-        
+
         try {
             dbUtil.connect();
             ResultSet resultSet = dbUtil.query(query);
@@ -45,14 +45,8 @@ public class AdvertisementController {
                 );
                 ads.add(ad);
             }
-        } catch (SQLException e) {
-            throw new AdNotFoundException("Error loading advertisements", e);
         } finally {
-            try {
-                dbUtil.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            dbUtil.close();
         }
         return ads;
     }
@@ -67,7 +61,6 @@ public class AdvertisementController {
                     advertisementPanel.displayAdvertisement(ad);
                     currentAdIndex++;
                 } else {
-                    // Display the subway map every 10 seconds for 5 seconds
                     advertisementPanel.displayMap();
                     currentAdIndex = 0;
                 }

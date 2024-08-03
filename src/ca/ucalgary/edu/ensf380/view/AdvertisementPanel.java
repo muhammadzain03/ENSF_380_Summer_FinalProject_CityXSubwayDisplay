@@ -3,11 +3,12 @@ package ca.ucalgary.edu.ensf380.view;
 import ca.ucalgary.edu.ensf380.model.Advertisement;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+@SuppressWarnings("serial")
 public class AdvertisementPanel extends JPanel {
     private JLabel adLabel;
     private List<Advertisement> advertisements;
@@ -26,13 +27,10 @@ public class AdvertisementPanel extends JPanel {
     }
 
     public void displayAdvertisement(Advertisement ad) {
-        // Display advertisement based on its media type
-        // For simplicity, let's assume we just display the media path as text
         adLabel.setText("Displaying: " + ad.getMediaType() + " - " + ad.getMediaPath());
     }
 
     public void displayMap() {
-        // Logic to display the subway map
         adLabel.setText("Displaying Subway Map");
     }
 
@@ -51,7 +49,6 @@ public class AdvertisementPanel extends JPanel {
                         displayAdvertisement(ad);
                         currentAdIndex++;
                     } else {
-                        // Display the subway map every 10 seconds for 5 seconds
                         displayMap();
                         currentAdIndex = 0;
                     }

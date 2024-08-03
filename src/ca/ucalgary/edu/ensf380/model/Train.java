@@ -1,14 +1,18 @@
 package ca.ucalgary.edu.ensf380.model;
 
 public class Train {
+    private String id;
     private String position;
-    private SubwayLine line;
     private String status;
 
-    public Train(String position, SubwayLine line, String status) {
+    public Train(String id, String position, String status) {
+        this.id = id;
         this.position = position;
-        this.line = line;
         this.status = status;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getPosition() {
@@ -17,14 +21,6 @@ public class Train {
 
     public void setPosition(String position) {
         this.position = position;
-    }
-
-    public SubwayLine getLine() {
-        return line;
-    }
-
-    public void setLine(SubwayLine line) {
-        this.line = line;
     }
 
     public String getStatus() {

@@ -1,27 +1,15 @@
 package ca.ucalgary.edu.ensf380.view;
 
-import ca.ucalgary.edu.ensf380.controller.AdvertisementController;
-import ca.ucalgary.edu.ensf380.view.AdvertisementPanel;
-import ca.ucalgary.edu.ensf380.view.WeatherPanel;
-
-import javax.swing.*;
-import java.awt.BorderLayout;
-
 public class SubwayScreenApp {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Subway Screen");
-        frame.setLayout(new BorderLayout());
+        if (args.length != 2) {
+            System.out.println("Usage: java SubwayScreenApp <train_number> <train_line>");
+            return;
+        }
 
-        AdvertisementPanel advertisementPanel = new AdvertisementPanel();
-        WeatherPanel weatherPanel = new WeatherPanel();
+        String trainNumber = args[0];
+        String trainLine = args[1];
 
-        frame.add(advertisementPanel, BorderLayout.CENTER);
-        frame.add(weatherPanel, BorderLayout.NORTH);
-
-        AdvertisementController adController = new AdvertisementController(advertisementPanel);
-
-        frame.setSize(800, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        new SubwayScreenGUI(trainNumber, trainLine);
     }
 }

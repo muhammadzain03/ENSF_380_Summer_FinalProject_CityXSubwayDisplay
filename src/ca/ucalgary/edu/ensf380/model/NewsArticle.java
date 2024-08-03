@@ -36,6 +36,8 @@ public class NewsArticle {
     }
 
     public void display() {
-        // Code to display news article
+        System.out.println("Title: " + title);
+        System.out.println("Source: " + source);
+        System.out.println("Date: " + date);
     }
 }

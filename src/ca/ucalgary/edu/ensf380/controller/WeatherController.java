@@ -1,35 +1,25 @@
-// To control the weather data retrieval and updating the weather panel if needed.
-
 package ca.ucalgary.edu.ensf380.controller;
 
 import ca.ucalgary.edu.ensf380.model.WeatherData;
 import ca.ucalgary.edu.ensf380.util.APIClient;
-import ca.ucalgary.edu.ensf380.util.APIException;
+import ca.ucalgary.edu.ensf380.view.WeatherPanel;
 
 import java.io.IOException;
 
 public class WeatherController {
-    private WeatherData weatherData;
+    private WeatherPanel weatherPanel;
 
-    public WeatherController() {
-        retrieveWeather();
+    public WeatherController(WeatherPanel weatherPanel) {
+        this.weatherPanel = weatherPanel;
     }
 
-    // getWeatherData method returns the current weather data.
-    public WeatherData getWeatherData() {
-        return weatherData;
-    }
-
-    // retrieveWeather fetches weather data using "APIClient" and handles "IOException" and "APIException".
     public void retrieveWeather() {
+        String url = "http://wttr.in/Calgary,CA?format=%25C+%25t";
         try {
-            this.weatherData = (WeatherData) APIClient.fetch("http://wttr.in/Calgary,CA");
-        } catch (IOException | APIException e) {
+            WeatherData weatherData = (WeatherData) APIClient.fetch(url);
+            weatherPanel.setWeatherData(weatherData);
+        } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void updateWeatherPanel() {
-        // Logic to update the WeatherPanel if needed
     }
 }

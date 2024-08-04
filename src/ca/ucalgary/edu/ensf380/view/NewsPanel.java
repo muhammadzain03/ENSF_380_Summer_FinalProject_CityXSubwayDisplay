@@ -48,9 +48,12 @@ public class NewsPanel extends JPanel {
            Matcher matcher = pattern.matcher(response);
            
            // Print all titles
-           if (matcher.find()) {
+           StringBuilder allNews = new StringBuilder();
+           for (int i = 1;matcher.find(); i++) {
                System.out.println(matcher.group(1));
-               newsLabel.setText(matcher.group(1));
+               allNews.append(matcher.group(1));
+               String news = allNews.toString();
+               newsLabel.setText(news);
            }
     	   
     	

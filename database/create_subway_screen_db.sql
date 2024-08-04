@@ -16,3 +16,5 @@ INSERT INTO advertisements (media_type, media_path, display_duration) VALUES
 ('GIF', 'ad2.gif', 10),
 ('JPEG', 'ad3.jpeg', 10),
 ('GIF', 'ad4.gif', 10);
+
+SELECT * FROM advertisements;

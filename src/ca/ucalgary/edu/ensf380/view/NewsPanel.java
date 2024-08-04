@@ -24,7 +24,7 @@ public class NewsPanel extends JPanel {
         this.articles = new ArrayList<>();
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(800, 50));
-        newsLabel = new JLabel("Loading news...asasaddsasdjha bsadas kjsdjk basjk sbadjh hjlsadl sabdhjas db sahjld", SwingConstants.CENTER);
+        newsLabel = new JLabel("Loading news...", SwingConstants.CENTER);
         newsLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         add(newsLabel, BorderLayout.CENTER);
         final String API_KEY = "c743a3ea8e1d418dbac5f997175c7290";

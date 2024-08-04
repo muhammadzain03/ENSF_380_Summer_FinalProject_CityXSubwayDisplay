@@ -29,11 +29,11 @@ public class SubwayScreenGUI {
     //private NewsController newsController;
     
     
-    public SubwayScreenGUI(String trainNumber, String city) {
+    public SubwayScreenGUI(String trainNumber, String city) throws IOException {
     	
     	this.advertisementPanel = new AdvertisementPanel();
     	this.weatherPanel = new WeatherPanel();
-    	//this.newsPanel = new NewsPanel();
+    	this.newsPanel = new NewsPanel();
     	this.trainInfoPanel = new TrainInfo();
     	
     	//this.advertisementController = new AdvertisementController(advertisementPanel);

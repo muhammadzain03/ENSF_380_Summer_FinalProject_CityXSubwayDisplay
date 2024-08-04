@@ -3,13 +3,13 @@
 public class SubwayScreenApp {
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.println("Usage: java SubwayScreenApp <train_number> <train_line>");
+            System.out.println("Usage: java SubwayScreenApp <train_number> <city>");
             return;
         }
 
         String trainNumber = args[0];
-        String trainLine = args[1];
+        String city = args[1];
 
-        new SubwayScreenGUI(trainNumber, trainLine);
+        new SubwayScreenGUI(trainNumber, city);
     }
 }

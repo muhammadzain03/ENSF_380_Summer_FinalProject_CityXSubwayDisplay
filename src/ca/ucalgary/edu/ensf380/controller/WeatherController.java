@@ -2,7 +2,7 @@ package ca.ucalgary.edu.ensf380.controller;
 
 import ca.ucalgary.edu.ensf380.view.WeatherPanel;
 
-import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -14,48 +14,50 @@ import java.util.regex.Pattern;
 
 public class WeatherController {
     private WeatherPanel weatherPanel;
+    private static final String WEATHER_REGEEX = "^(.*?)\\s+(.*?)\\s+([+-]?\\d+°C)\\s+([←↔→↑↓↖↗↙↘]+\\d+km/h)\\s+(\\d+\\.\\d+mm)$";
+    private static final Pattern WEATHER_PATTERN = Pattern.compile(WEATHER_REGEEX);
 
     public WeatherController(WeatherPanel weatherPanel) {
         this.weatherPanel = weatherPanel;
     }
 
-    public void retrieveWeather() {
+    public void retrieveWeather(String city) {
         new Thread(() -> {
             try {
-                String weatherData = fetchWeatherData("https://wttr.in/Calgary?format=%l+%C+%t+%w+%p");
+                String weatherData = fetchWeatherData("https://wttr.in/"+ city + "?format=%l+%C+%t+%w+%p");
                 String[] parsedData = parseWeatherData(weatherData);
                 if (parsedData != null) {
-                    SwingUtilities.invokeLater(() -> 
+                    EventQueue.invokeLater(() -> {
                         weatherPanel.updateWeather(
                             parsedData[0], // Location
                             parsedData[1], // Condition
                             parsedData[2], // Temperature
                             parsedData[3], // Wind
                             parsedData[4]  // Precipitation
-                        )
-                    );
+                        );
+                    });
                 } else {
-                    SwingUtilities.invokeLater(() -> 
+                    EventQueue.invokeLater(() -> {
                         weatherPanel.updateWeather(
                             "Unknown", 
                             "Unknown", 
                             "Unknown", 
                             "Unknown", 
                             "Unknown"
-                        )
-                    );
+                        );
+                    });
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                SwingUtilities.invokeLater(() -> 
+                EventQueue.invokeLater(() -> {
                     weatherPanel.updateWeather(
                         "Error", 
                         "Error", 
                         "Error", 
                         "Error", 
                         "Error"
-                    )
-                );
+                    );
+                });
             }
         }).start();
     }
@@ -86,19 +88,17 @@ public class WeatherController {
     }
 
     private String[] parseWeatherData(String weatherData) {
-    	String textData = weatherData.trim();
+    	String trimmedData = weatherData.trim();
 
-        // Use regex to match and extract the different components of the weather data
-        Pattern pattern = Pattern.compile("^(.*?)\\s+(.*?)\\s+([+-]?\\d+°C)\\s+([←↔→↑↓↖↗↙↘]+\\d+km/h)\\s+(\\d+\\.\\d+mm)$");
-        Matcher matcher = pattern.matcher(textData);
+        Matcher myMatcher = WEATHER_PATTERN.matcher(trimmedData);
 
-        if (matcher.find()) {
-            // Extract and clean each component
-            String location = matcher.group(1).trim();
-            String condition = matcher.group(2).trim();
-            String temperature = matcher.group(3).trim();
-            String wind = matcher.group(4).trim();
-            String precipitation = matcher.group(5).trim();
+        if (myMatcher.find()) {
+  
+            String location = myMatcher.group(1).trim();
+            String condition = myMatcher.group(2).trim();
+            String temperature = myMatcher.group(3).trim();
+            String wind = myMatcher.group(4).trim();
+            String precipitation = myMatcher.group(5).trim();
 
             return new String[]{location, condition, temperature, wind, precipitation};
         }

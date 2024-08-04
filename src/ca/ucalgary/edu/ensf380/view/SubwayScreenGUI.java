@@ -2,11 +2,19 @@ package ca.ucalgary.edu.ensf380.view;
 
 import ca.ucalgary.edu.ensf380.controller.AdvertisementController;
 import ca.ucalgary.edu.ensf380.controller.WeatherController;
-import ca.ucalgary.edu.ensf380.controller.NewsController;
+//import ca.ucalgary.edu.ensf380.controller.NewsController;
+
+
+import ca.ucalgary.edu.ensf380.view.AdvertisementPanel;
+import ca.ucalgary.edu.ensf380.view.WeatherPanel;
+import ca.ucalgary.edu.ensf380.view.NewsPanel;
+import ca.ucalgary.edu.ensf380.view.TrainInfo;
 
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+
 
 
 public class SubwayScreenGUI {
@@ -18,14 +26,14 @@ public class SubwayScreenGUI {
     
     private AdvertisementController advertisementController;
     private WeatherController weatherController;
-    private NewsController newsController;
+    //private NewsController newsController;
     
     
     public SubwayScreenGUI(String trainNumber, String city) {
     	
     	this.advertisementPanel = new AdvertisementPanel();
     	this.weatherPanel = new WeatherPanel();
-    	this.newsPanel = new NewsPanel();
+    	//this.newsPanel = new NewsPanel();
     	this.trainInfoPanel = new TrainInfo();
     	
     	//this.advertisementController = new AdvertisementController(advertisementPanel);

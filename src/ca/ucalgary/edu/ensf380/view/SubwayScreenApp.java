@@ -1,7 +1,9 @@
  package ca.ucalgary.edu.ensf380.view;
 
+import java.io.IOException;
+
 public class SubwayScreenApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException { 
         if (args.length != 2) {
             System.out.println("Usage: java SubwayScreenApp <train_number> <city>");
             return;
@@ -12,4 +14,5 @@ public class SubwayScreenApp {
 
         new SubwayScreenGUI(trainNumber, city);
     }
+
 }

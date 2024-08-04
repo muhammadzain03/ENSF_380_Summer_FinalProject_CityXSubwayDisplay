@@ -2,7 +2,6 @@ package ca.ucalgary.edu.ensf380.view;
 
 import ca.ucalgary.edu.ensf380.controller.AdvertisementController;
 import ca.ucalgary.edu.ensf380.controller.WeatherController;
-import ca.ucalgary.edu.ensf380.controller.NewsController;
 import ca.ucalgary.edu.ensf380.view.AdvertisementPanel;
 import ca.ucalgary.edu.ensf380.view.WeatherPanel;
 import ca.ucalgary.edu.ensf380.view.NewsPanel;
@@ -10,10 +9,11 @@ import ca.ucalgary.edu.ensf380.view.TrainInfo;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 @SuppressWarnings("serial")
 public class SubwayScreenGUI extends JFrame {
-    public SubwayScreenGUI(String trainNumber, String trainLine) {
+    public SubwayScreenGUI(String trainNumber, String trainLine) throws IOException {
         setTitle("Subway Screen - " + trainNumber + " on " + trainLine);
         setLayout(new BorderLayout());
 
@@ -36,7 +36,7 @@ public class SubwayScreenGUI extends JFrame {
         
         new AdvertisementController(advertisementPanel);
         new WeatherController(weatherPanel).retrieveWeather();
-        new NewsController(newsPanel).fetchNews("train");
+        new NewsPanel();
 
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

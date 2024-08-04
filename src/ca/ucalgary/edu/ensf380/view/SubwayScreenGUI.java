@@ -2,19 +2,14 @@ package ca.ucalgary.edu.ensf380.view;
 
 import ca.ucalgary.edu.ensf380.controller.AdvertisementController;
 import ca.ucalgary.edu.ensf380.controller.WeatherController;
-//import ca.ucalgary.edu.ensf380.controller.NewsController;
-
-
 import ca.ucalgary.edu.ensf380.view.AdvertisementPanel;
 import ca.ucalgary.edu.ensf380.view.WeatherPanel;
 import ca.ucalgary.edu.ensf380.view.NewsPanel;
 import ca.ucalgary.edu.ensf380.view.TrainInfo;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-
 
 
 public class SubwayScreenGUI {
@@ -62,3 +57,4 @@ public class SubwayScreenGUI {
     	});
     }
 }
+

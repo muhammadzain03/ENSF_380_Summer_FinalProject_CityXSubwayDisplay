@@ -44,7 +44,7 @@ public class StationController {
     			
     			
     			//System.out.println(values[3] +" " +  values[4]);
-    			setStations(values[4], values[3]);
+    			setStations(values[4], values[3],values[0] );
     			// Example: print each value in the CSV
     			
     			
@@ -56,8 +56,8 @@ public class StationController {
     	
     }
     
-    private void setStations(String name, String code) {
-    	Station station = new Station(name, code);
+    private void setStations(String name, String code, String num) {
+    	Station station = new Station(name, code,num);
     	stations.add(station);
     	
     }

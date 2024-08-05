@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class StationInfoPanel {
 	private JPanel panel;
-    private static JLabel[] stationLabel = new JLabel[5];
+    private JLabel[] stationLabel = new JLabel[5];
 
     public StationInfoPanel() {
     	this.panel = new JPanel(new GridLayout(1, 5));
@@ -22,7 +22,7 @@ public class StationInfoPanel {
     	return panel;
     }
 
-    public static void updateTrainPosition(String prev, String curr, String next, String next1, String next2) {
+    public void updateTrainPosition(String prev, String curr, String next, String next1, String next2) {
     	stationLabel[0].setText("Previous: " + prev);
         stationLabel[1].setText("Current: " + curr);
         stationLabel[2].setText("Next: " + next);

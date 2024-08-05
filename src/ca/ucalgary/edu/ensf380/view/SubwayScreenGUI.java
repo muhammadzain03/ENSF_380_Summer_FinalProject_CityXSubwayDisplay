@@ -14,7 +14,7 @@ public class SubwayScreenGUI {
 	private AdvertisementPanel advertisementPanel; 
     private WeatherPanel weatherPanel; 
     private NewsPanel newsPanel;
-    public StationInfoPanel stationInfoPanel;
+    private StationInfoPanel stationInfoPanel;
    
     private AdvertisementController advertisementController;
     private WeatherController weatherController;
@@ -52,6 +52,10 @@ public class SubwayScreenGUI {
             
             mainframe.setVisible(true);
     	});
+    }
+    
+    public StationInfoPanel getStationInfoPanel() {
+    	return stationInfoPanel;
     }
 }
 

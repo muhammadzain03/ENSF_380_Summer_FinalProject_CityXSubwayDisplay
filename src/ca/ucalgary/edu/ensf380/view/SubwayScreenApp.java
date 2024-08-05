@@ -91,7 +91,7 @@ public class SubwayScreenApp {
 					            if (station.getNumber().equals(nextStationNumberString2)) {
 									 nextStation2 = station.getName();
 								}
-					            gui.stationInfoPanel.updateTrainPosition(previousStation, currentStation, nextStation, nextStation1, nextStation2);
+					            gui.getStationInfoPanel().updateTrainPosition(previousStation, currentStation, nextStation, nextStation1, nextStation2);
 					        }
 							
 						
@@ -124,7 +124,7 @@ public class SubwayScreenApp {
 					            if (station.getNumber().equals(nextStationNumberString2)) {
 									 nextStation2 = station.getName();
 								}
-					            gui.stationInfoPanel.updateTrainPosition(previousStation, currentStation, nextStation, nextStation1, nextStation2);
+					            gui.getStationInfoPanel().updateTrainPosition(previousStation, currentStation, nextStation, nextStation1, nextStation2);
 					        }
 						}
 						

@@ -48,7 +48,8 @@ public class AdvertisementController {
         } finally {
             dbUtil.close(); // Close the database connection
         }
-        return ads; // Return the list of advertisements
+        return ads;
+        // Return the list of advertisements
     }
 
     // Method to start rotating advertisements

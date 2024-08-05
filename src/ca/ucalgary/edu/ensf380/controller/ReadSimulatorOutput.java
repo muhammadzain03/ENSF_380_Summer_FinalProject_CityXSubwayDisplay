@@ -12,30 +12,22 @@ import java.util.List;
 import ca.ucalgary.edu.ensf380.model.Train;
 
 public class ReadSimulatorOutput {
-	private static List<Train> trains = new ArrayList<Train>();
+	private static ArrayList<Train> trains = new ArrayList<Train>();
 
 	public ReadSimulatorOutput() {
-		this.trains = trains;
+		readOutput();
 		
 	}
 	
-	public static List<Train> geTrains(){
+	public ArrayList<Train> getTrains(){
 		return trains;
 		
 	}
 	
 	
 	
-	private static  File getLatestFile(File[] files) {
-        if (files == null || files.length == 0) {
-            return null;
-        }
-        
-        Arrays.sort(files, Comparator.comparingLong(File::lastModified).reversed());
-        return files[0];
-    }
     
-    private static void readOutput() {
+    private void readOutput() {
             // Assuming there's only one CSV file, or you can add logic to handle multiple files
         	String folderPath = "./out"; // Replace with your folder path
         	
@@ -69,7 +61,7 @@ public class ReadSimulatorOutput {
             }
             	
             try {
-                Thread.sleep(13000); // 15 seconds = 15,000 milliseconds
+                Thread.sleep(2000); // 15 seconds = 15,000 milliseconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -77,7 +69,17 @@ public class ReadSimulatorOutput {
     	
     }
     
-    private static void setTrains(String number, String station, String dir) {
+    
+    private File getLatestFile(File[] files) {
+    	if (files == null || files.length == 0) {
+    		return null;
+    	}
+    	
+    	Arrays.sort(files, Comparator.comparingLong(File::lastModified).reversed());
+    	return files[0];
+    }
+    
+    private void setTrains(String number, String station, String dir) {
     	Train train = new Train(number, station, dir);
     	trains.add(train);
     	

@@ -4,12 +4,6 @@ import ca.ucalgary.edu.ensf380.controller.AdvertisementController;
 import ca.ucalgary.edu.ensf380.controller.WeatherController;
 import ca.ucalgary.edu.ensf380.controller.NewsController;
 
-
-import ca.ucalgary.edu.ensf380.view.AdvertisementPanel;
-import ca.ucalgary.edu.ensf380.view.WeatherPanel;
-import ca.ucalgary.edu.ensf380.view.NewsPanel;
-import ca.ucalgary.edu.ensf380.view.TrainInfo;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -20,7 +14,7 @@ public class SubwayScreenGUI {
 	private AdvertisementPanel advertisementPanel; 
     private WeatherPanel weatherPanel; 
     private NewsPanel newsPanel;
-    private TrainInfo trainInfoPanel;
+    private StationInfoPanel stationInfoPanel;
     
     private AdvertisementController advertisementController;
     private WeatherController weatherController;
@@ -32,7 +26,7 @@ public class SubwayScreenGUI {
     	this.advertisementPanel = new AdvertisementPanel();
     	this.weatherPanel = new WeatherPanel();
     	this.newsPanel = new NewsPanel();
-    	this.trainInfoPanel = new TrainInfo();
+    	this.stationInfoPanel = new StationInfoPanel();
     	
     	this.advertisementController = new AdvertisementController(advertisementPanel);
     	this.weatherController = new WeatherController(weatherPanel);
@@ -53,7 +47,7 @@ public class SubwayScreenGUI {
             
             JPanel bottomPanel = new JPanel(new GridLayout(2, 1));
             bottomPanel.add(newsPanel.getPanel());    
-            bottomPanel.add(trainInfoPanel);
+            bottomPanel.add(stationInfoPanel.getPanel());
             mainframe.getContentPane().add(BorderLayout.SOUTH, bottomPanel);          
             
             mainframe.setVisible(true);

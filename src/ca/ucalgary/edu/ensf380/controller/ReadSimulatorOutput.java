@@ -9,13 +9,30 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import ca.ucalgary.edu.ensf380.MyApp3;
 import ca.ucalgary.edu.ensf380.model.Train;
 
 public class ReadSimulatorOutput {
 	private static ArrayList<Train> trains = new ArrayList<Train>();
 
 	public ReadSimulatorOutput() {
-		readOutput();
+		String folderPath = "./out"; 
+		File folder = new File(folderPath);
+	    File[] listOfFiles = folder.listFiles();
+
+	    // Delete existing files
+	    if (listOfFiles != null) {
+	        for (File file : listOfFiles) {
+	            if (file.isFile()) {
+	                if (file.delete()) {
+	                    System.out.println("Deleted file: " + file.getName());
+	                } else {
+	                    System.out.println("Failed to delete file: " + file.getName());
+	                }
+	            }
+	        }
+	    }
+	
 		
 	}
 	
@@ -27,10 +44,10 @@ public class ReadSimulatorOutput {
 	
 	
     
-    private void readOutput() {
+    public void readOutput() {
             // Assuming there's only one CSV file, or you can add logic to handle multiple files
         	String folderPath = "./out"; // Replace with your folder path
-        	
+        	trains.clear();
         	// List all files in the directory
         	File folder = new File(folderPath);
         	File[] listOfFiles = folder.listFiles();
@@ -61,7 +78,7 @@ public class ReadSimulatorOutput {
             }
             	
             try {
-                Thread.sleep(2000); // 15 seconds = 15,000 milliseconds
+                Thread.sleep(15000); 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -83,10 +100,10 @@ public class ReadSimulatorOutput {
     	Train train = new Train(number, station, dir);
     	trains.add(train);
     	
-    	
-    	
     }
 
 }
+
+
 
 

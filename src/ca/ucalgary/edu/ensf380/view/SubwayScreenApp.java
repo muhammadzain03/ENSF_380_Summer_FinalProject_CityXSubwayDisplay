@@ -29,12 +29,21 @@ public class SubwayScreenApp {
             
             int trainNum = Integer.parseInt(args[0]) - 1;
             
-            MyApp3.start();
+            MyApp3 app3 = new MyApp3();
             new SubwayScreenGUI(trainNumber, city, countryCode);
-            
             ReadSimulatorOutput output = new ReadSimulatorOutput();
-            ArrayList<Train> l = output.getTrains();
-            System.out.println(l.get(trainNum).getDirection());
+            try {
+                Thread.sleep(5000); // 5000 milliseconds = 5 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            while (app3.running != false) {
+				output.readOutput();
+				ArrayList<Train> x = output.getTrains();
+				System.out.println(x.get(trainNum).getPosition());
+				
+			}
+            
             
         }
     }

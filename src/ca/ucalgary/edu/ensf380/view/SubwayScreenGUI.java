@@ -34,7 +34,7 @@ public class SubwayScreenGUI {
     	this.newsPanel = new NewsPanel();
     	this.trainInfoPanel = new TrainInfo();
     	
-    	//this.advertisementController = new AdvertisementController(advertisementPanel);
+    	this.advertisementController = new AdvertisementController(advertisementPanel);
     	this.weatherController = new WeatherController(weatherPanel);
     	weatherController.retrieveWeather(city);
     	this.newsController = new NewsController(newsPanel);

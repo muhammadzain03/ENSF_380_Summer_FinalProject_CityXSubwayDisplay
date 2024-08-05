@@ -1,4 +1,4 @@
- package ca.ucalgary.edu.ensf380.view;
+package ca.ucalgary.edu.ensf380.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,54 +7,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.sound.midi.SysexMessage;
-import javax.swing.table.TableStringConverter;
-
-import ca.ucalgary.edu.ensf380.MyApp3;
 import ca.ucalgary.edu.ensf380.model.Train;
 
-public class SubwayScreenApp {
-	
+public class ReadSimulatorOutput {
 	private static List<Train> trains = new ArrayList<Train>();
-	private static TrainInfo trainInfo;
 
-    public static void main(String[] args) throws IOException { 
-        if (args.length != 2) {
-            System.out.println("Usage: java SubwayScreenApp <train_number> <train_line>");
-            return;
-        }
-
-        String trainNumber = args[0];
-        String trainLine = args[1];
-        
-        SubwayScreenApp app = new SubwayScreenApp();
-        app.initialize(trainNumber, trainLine);
-    }
-        
-        private void initialize(String trainNumber, String trainLine) throws IOException {
-        	new MyApp3();
-            new SubwayScreenGUI(trainNumber, trainLine);
-            //this.trainInfo = new TrainInfo(); // Initialize TrainInfo object
-            
-            try {
-            	
-                Thread.sleep(5000); // 5 seconds = 5000 milliseconds
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            while (true) {
-                readOutput();
-               
-            }
-        }
-        
-       
-    
-    private static File getLatestFile(File[] files) {
+	public ReadSimulatorOutput() {
+		this.trains = trains;
+		
+	}
+	
+	public static List<Train> geTrains(){
+		return trains;
+		
+	}
+	
+	
+	
+	private static  File getLatestFile(File[] files) {
         if (files == null || files.length == 0) {
             return null;
         }
@@ -95,7 +67,7 @@ public class SubwayScreenApp {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            	//updateTrainsPanel();
+            	
             try {
                 Thread.sleep(13000); // 15 seconds = 15,000 milliseconds
             } catch (InterruptedException e) {
@@ -112,11 +84,7 @@ public class SubwayScreenApp {
     	
     	
     }
-    
-    public static void updateTrainsPanel() {
-    	trainInfo.updateTrainPositions(trains);
-    	
-    }
-    
+
 }
+
 

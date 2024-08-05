@@ -21,10 +21,11 @@ public class SubwayScreenApp {
 	
     public static void main(String[] args) throws IOException { 
         if (args.length != 2) {
-            System.out.println("Usage: java SubwayScreenApp <train_number> <keyword>");
+            System.out.println("Usage: java SubwayScreenApp <train_number> <city> <country_code>");
         }else {
             String trainNumber = args[0];
             String city = args[1];
+            String countryCode = args[2];
             
             int trainNum = Integer.parseInt(args[0]) - 1;
             

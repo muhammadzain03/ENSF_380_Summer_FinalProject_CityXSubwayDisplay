@@ -40,6 +40,7 @@ public class SubwayScreenApp {
             this.trainInfo = new TrainInfo(); // Initialize TrainInfo object
             
             try {
+            	
                 Thread.sleep(5000); // 5 seconds = 5000 milliseconds
             } catch (InterruptedException e) {
                 e.printStackTrace();

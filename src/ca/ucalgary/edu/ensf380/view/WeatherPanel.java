@@ -34,9 +34,9 @@ public class WeatherPanel {
         timeLabel.setText(now.format(formatter));
         timeLabel.setFont(new Font("Arial", Font.PLAIN, 24));
     }
-
-    public void updateWeather(String location, String condition, String temperature, String wind, String precipitation) {
-        String weatherInfo = String.format("<html>Location: %s<br>Condition: %s<br>Temperature: %s<br>Wind: %s<br>Precipitation: %s</html>", location, condition, temperature, wind, precipitation);
-        weatherLabel.setText(weatherInfo);
+    
+    public void updateWeatherLabel(String weatherInfo) {
+    	weatherLabel.setText(weatherInfo);
     }
+    
 }

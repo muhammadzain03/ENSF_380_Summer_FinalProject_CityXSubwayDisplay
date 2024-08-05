@@ -2,6 +2,9 @@ package ca.ucalgary.edu.ensf380.view;
 
 import ca.ucalgary.edu.ensf380.controller.AdvertisementController;
 import ca.ucalgary.edu.ensf380.controller.WeatherController;
+import ca.ucalgary.edu.ensf380.controller.NewsController;
+
+
 import ca.ucalgary.edu.ensf380.view.AdvertisementPanel;
 import ca.ucalgary.edu.ensf380.view.WeatherPanel;
 import ca.ucalgary.edu.ensf380.view.NewsPanel;
@@ -21,7 +24,7 @@ public class SubwayScreenGUI {
     
     private AdvertisementController advertisementController;
     private WeatherController weatherController;
-    //private NewsController newsController;
+    private NewsController newsController;
     
     
     public SubwayScreenGUI(String trainNumber, String city) throws IOException {
@@ -31,11 +34,11 @@ public class SubwayScreenGUI {
     	this.newsPanel = new NewsPanel();
     	this.trainInfoPanel = new TrainInfo();
     	
-    	this.advertisementController = new AdvertisementController(advertisementPanel);
+    	//this.advertisementController = new AdvertisementController(advertisementPanel);
     	this.weatherController = new WeatherController(weatherPanel);
     	weatherController.retrieveWeather(city);
-    	//this.newsController = new NewsController(newsPanel);
-    	//newsController.fetchNews("train");
+    	this.newsController = new NewsController(newsPanel);
+    	newsController.retrieveNews();
     	
     	EventQueue.invokeLater(() -> {
     		JFrame mainframe = new JFrame("Subway Screen - " + trainNumber);
@@ -46,10 +49,10 @@ public class SubwayScreenGUI {
             JPanel mainPanel = new JPanel(new BorderLayout());
             mainPanel.add(advertisementPanel, BorderLayout.CENTER);
             mainPanel.add(weatherPanel.getPanel(), BorderLayout.EAST);
-            mainframe.getContentPane().add( BorderLayout.CENTER, mainPanel);
+            mainframe.getContentPane().add(BorderLayout.CENTER, mainPanel);
             
             JPanel bottomPanel = new JPanel(new GridLayout(2, 1));
-            bottomPanel.add(newsPanel);    
+            bottomPanel.add(newsPanel.getPanel());    
             bottomPanel.add(trainInfoPanel);
             mainframe.getContentPane().add(BorderLayout.SOUTH, bottomPanel);          
             

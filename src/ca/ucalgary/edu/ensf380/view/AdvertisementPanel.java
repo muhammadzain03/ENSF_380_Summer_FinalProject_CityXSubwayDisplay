@@ -14,8 +14,6 @@ public class AdvertisementPanel extends JPanel {
     private Timer timer; // Timer to handle ad rotation
     private int currentAdIndex = 0; // Index to keep track of the current advertisement
     private List<Advertisement> advertisements; // List of advertisements to be displayed
-    private JLabel mapLabel; // Label to display the subway map
-    private boolean showingMap = false; // Flag to indicate if the map is being shown
 
     // Constructor to initialize the AdvertisementPanel
     public AdvertisementPanel() {
@@ -54,20 +52,6 @@ public class AdvertisementPanel extends JPanel {
         repaint();
     }
 
-    // Method to display the subway map
-    public void displayMap() {
-        if (mapLabel == null) {
-            // Initialize the map label with the map image
-            ImageIcon mapIcon = new ImageIcon("resources/map.png"); // Adjust the path to your map image
-            mapLabel = new JLabel(mapIcon, SwingConstants.CENTER);
-        }
-        // Remove current content and display the map
-        removeAll();
-        add(mapLabel, BorderLayout.CENTER);
-        revalidate();
-        repaint();
-    }
-
     // Method to start the advertisement rotation
     private void startAdRotation() {
         if (timer != null) {
@@ -79,26 +63,12 @@ public class AdvertisementPanel extends JPanel {
             @Override
             public void run() {
                 SwingUtilities.invokeLater(() -> {
-                    if (showingMap) {
-                        // If the map is currently showing, switch back to advertisements
-                        remove(mapLabel);
-                        add(adLabel, BorderLayout.CENTER);
-                        revalidate();
-                        repaint();
-                        showingMap = false;
-                    } else {
-                        if (advertisements != null && !advertisements.isEmpty()) {
-                            if (currentAdIndex < advertisements.size()) {
-                                // Display the next advertisement in the list
-                                Advertisement ad = advertisements.get(currentAdIndex);
-                                displayAdvertisement(ad);
-                                currentAdIndex++;
-                            } else {
-                                // If all advertisements have been displayed, show the map
-                                displayMap();
-                                currentAdIndex = 0;
-                                showingMap = true;
-                            }
+                    if (advertisements != null && !advertisements.isEmpty()) {
+                        if (currentAdIndex < advertisements.size()) {
+                            // Display the next advertisement in the list
+                            Advertisement ad = advertisements.get(currentAdIndex);
+                            displayAdvertisement(ad);
+                            currentAdIndex = (currentAdIndex + 1) % advertisements.size(); // Cycle back to the start
                         }
                     }
                 });

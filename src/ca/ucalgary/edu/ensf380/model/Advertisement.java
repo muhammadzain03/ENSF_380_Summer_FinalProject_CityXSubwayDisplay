@@ -13,35 +13,19 @@ public class Advertisement {
         this.displayDuration = displayDuration;
     }
 
-    public int getId() {
+    public int getId() {	// Added to stay consistent with the Database
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getMediaType() {
+    public String getMediaType() {		// Used in "AdvertisementPanel.java" to determine the type of media to display.
         return mediaType;
     }
 
-    public void setMediaType(String mediaType) {
-        this.mediaType = mediaType;
-    }
-
-    public String getMediaPath() {
+    public String getMediaPath() {		// Used in "AdvertisementPanel.java" to get the path of the media file.
         return mediaPath;
     }
 
-    public void setMediaPath(String mediaPath) {
-        this.mediaPath = mediaPath;
-    }
-
-    public int getDisplayDuration() {
+    public int getDisplayDuration() {	// Added to stay consistent with the Database
         return displayDuration;
-    }
-
-    public void setDisplayDuration(int displayDuration) {
-        this.displayDuration = displayDuration;
     }
 }

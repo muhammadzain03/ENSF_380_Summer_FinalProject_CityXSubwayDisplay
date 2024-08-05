@@ -4,39 +4,36 @@ import ca.ucalgary.edu.ensf380.model.Advertisement;
 import ca.ucalgary.edu.ensf380.util.DatabaseUtil;
 import ca.ucalgary.edu.ensf380.view.AdvertisementPanel;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.sql.*;
+import java.util.*;
 
 public class AdvertisementController {
-    private List<Advertisement> advertisements;
-    private int currentAdIndex = 0;
-    private Timer timer;
-    private AdvertisementPanel advertisementPanel;
+    private List<Advertisement> advertisements; 	// List to store advertisements
+    private int currentAdIndex = 0; 				// Index to track the current advertisement
+    private Timer timer; 							// Timer to schedule ad rotation
+    private AdvertisementPanel advertisementPanel; 	// Reference to the "AdvertisementPanel.java"
 
     // Constructor to initialize the AdvertisementController
     public AdvertisementController(AdvertisementPanel advertisementPanel) {
-        this.advertisementPanel = advertisementPanel;
+        this.advertisementPanel = advertisementPanel;	// Assign the AdvertisementPanel reference
         try {
             this.advertisements = loadAds(); // Load advertisements from the database
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error loading advertisements from the database: " + e.getMessage());
+            this.advertisements = new ArrayList<>(); // Initialize to an empty list if loading fails
         }
         startAdRotation(); // Start rotating the advertisements
     }
 
     // Method to load advertisements from the database
     public List<Advertisement> loadAds() throws SQLException {
-        List<Advertisement> ads = new ArrayList<>();
-        String query = "SELECT * FROM advertisements";
-        DatabaseUtil dbUtil = new DatabaseUtil();
-
+        List<Advertisement> ads = new ArrayList<>();	// Initialize the list of advertisements
+        String query = "SELECT * FROM advertisements";	// SQL query to select all advertisements
+        DatabaseUtil dbUtil = new DatabaseUtil();		// Reference to "DatabaseUtil.java" to handle database operations
+        
         try {
-            dbUtil.connect(); // Connect to the database
-            ResultSet resultSet = dbUtil.query(query);
+            dbUtil.createConnection(); // Connect to the database - called from "DatabaseUtil.java"
+            ResultSet resultSet = dbUtil.selectQuery(query);	// Execute the query and get the result set
 
             // Iterate through the result set and create Advertisement objects
             while (resultSet.next()) {
@@ -56,17 +53,15 @@ public class AdvertisementController {
 
     // Method to start rotating advertisements
     private void startAdRotation() {
-        timer = new Timer();
+        timer = new Timer();	// Initialize the timer
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (currentAdIndex < advertisements.size()) {
-                    Advertisement ad = advertisements.get(currentAdIndex);
-                    advertisementPanel.displayAdvertisement(ad); // Display the current advertisement
-                    currentAdIndex++;
-                } else {
-                    advertisementPanel.displayMap(); // Display the map every 10 seconds for 5 seconds
-                    currentAdIndex = 0;
+            	// Check if there are advertisements and the current index is within bounds
+                if (advertisements != null && !advertisements.isEmpty()) {
+                    Advertisement ad = advertisements.get(currentAdIndex);	// Get the current advertisement
+                    advertisementPanel.displayAdvertisement(ad); 			// Display the current advertisement
+                    currentAdIndex = (currentAdIndex + 1) % advertisements.size();	// Increment and wrap the index
                 }
             }
         }, 0, 10000); // Rotate ads every 10 seconds
@@ -75,7 +70,7 @@ public class AdvertisementController {
     // Method to stop the advertisement rotation
     public void stopAdRotation() {
         if (timer != null) {
-            timer.cancel(); // Cancel the timer
+            timer.cancel(); // Cancel the timer if it is not null
         }
     }
 }

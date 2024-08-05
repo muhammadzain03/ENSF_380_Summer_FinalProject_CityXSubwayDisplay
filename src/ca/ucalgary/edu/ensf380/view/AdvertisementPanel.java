@@ -8,22 +8,19 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class AdvertisementPanel extends JPanel {
+public class AdvertisementPanel { 
     private static final String BASE_PATH = "advertisements/"; // Set the base path for advertisement files
-    private JLabel adLabel; // Label to display advertisements
-    private List<Advertisement> advertisements; // List of advertisements to be displayed
+	private JPanel panel;
+    private JLabel adLabel; 
 
-    // Constructor to initialize the AdvertisementPanel
     public AdvertisementPanel() {
-        setLayout(new BorderLayout()); // Set the layout to BorderLayout
-        adLabel = new JLabel("", SwingConstants.CENTER); // Initialize the advertisement label
-        add(adLabel, BorderLayout.CENTER); // Add the label to the center of the panel
+    	this.panel = new JPanel(new BorderLayout());
+        this.adLabel = new JLabel("Loading ads...", SwingConstants.CENTER); 
+        panel.add(adLabel, BorderLayout.CENTER); 
     }
-
-    // Method to set the list of advertisements
-    public void setAdvertisements(List<Advertisement> advertisements) {
-        this.advertisements = advertisements;
-        //startAdRotation(); // Start the ad rotation
+    
+    public JPanel getPanel() {
+    	return panel;
     }
 
     // Method to display an advertisement based on its type
@@ -46,8 +43,5 @@ public class AdvertisementPanel extends JPanel {
                 adLabel.setText("Unsupported media type: " + mediaType);
                 break;
         }
-        revalidate();
-        repaint();
     }
-
 }

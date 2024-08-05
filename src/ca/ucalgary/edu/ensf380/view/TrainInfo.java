@@ -20,12 +20,12 @@ public class TrainInfo extends JPanel {
         }
     }
 
-    public void updateTrainPositions(List<Train> trains) {
+    public void updateTrainPositions(String prev, String curr, String next, String next1, String next2) {
     	trainInfoArea.setText("");
         StringBuilder trainInfoText = new StringBuilder();
-        for (Train train : trains) {
-            trainInfoText.append(String.format("Train %s: %s\n", train.getId(), train.getPosition()));
-        }
+//        for (Train train : trains) {
+//            trainInfoText.append(String.format("Train %s: %s\n", train.getId(), train.getPosition()));
+//        }
         trainInfoArea.setText(trainInfoText.toString());
         System.out.println(trainInfoText);
     }

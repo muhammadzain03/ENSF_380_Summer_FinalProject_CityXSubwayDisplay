@@ -3,12 +3,12 @@ package ca.ucalgary.edu.ensf380.model;
 public class Station {
     private String name;
     private String code;
-    private String coordinates;
 
-    public Station(String name, String code, String coordinates) {
+
+    public Station(String name, String code) {
         this.name = name;
         this.code = code;
-        this.coordinates = coordinates;
+      
     }
 
     public String getName() {
@@ -27,11 +27,5 @@ public class Station {
         this.code = code;
     }
 
-    public String getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(String coordinates) {
-        this.coordinates = coordinates;
-    }
+   
 }

@@ -37,6 +37,7 @@ public class ReadSimulatorOutput {
 	}
 	
 	public ArrayList<Train> getTrains(){
+		//System.out.print(trains.get(0).getPosition());
 		return trains;
 		
 	}
@@ -77,11 +78,11 @@ public class ReadSimulatorOutput {
                 e.printStackTrace();
             }
             	
-            try {
-                Thread.sleep(15000); 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(15000); 
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
        
     	
     }

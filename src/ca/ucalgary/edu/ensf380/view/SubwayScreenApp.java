@@ -15,6 +15,8 @@ import javax.swing.table.TableStringConverter;
 
 import ca.ucalgary.edu.ensf380.MyApp3;
 import ca.ucalgary.edu.ensf380.controller.ReadSimulatorOutput;
+import ca.ucalgary.edu.ensf380.controller.StationController;
+import ca.ucalgary.edu.ensf380.model.Station;
 import ca.ucalgary.edu.ensf380.model.Train;
 
 public class SubwayScreenApp {
@@ -32,22 +34,38 @@ public class SubwayScreenApp {
             MyApp3 app3 = new MyApp3();
             new SubwayScreenGUI(trainNumber, city, countryCode);
             ReadSimulatorOutput output = new ReadSimulatorOutput();
+            StationController station = new StationController();
             try {
                 Thread.sleep(5000); // 5000 milliseconds = 5 seconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             while (app3.running != false) {
+            	try {
+                    Thread.sleep(15000); 
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 				output.readOutput();
 				ArrayList<Train> x = output.getTrains();
 				System.out.println(x.get(trainNum).getPosition());
+				ArrayList<Station> currentStation = station.getStations();
+				for(Station stations : currentStation) {
+					if (stations.getCode().equals(x.get(trainNum).getPosition())) {
+						System.out.println("Train T"+ x.get(trainNum).getId()+ " is at " + stations.getName() + " moving " + x.get(trainNum).getDirection());
+					}
+				}
+			
+				
+				
 				
 			}
             
             
         }
-    }
-    
+        
+        
+    }       
 
     }
         

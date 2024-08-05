@@ -21,10 +21,12 @@ public class TrainInfo extends JPanel {
     }
 
     public void updateTrainPositions(List<Train> trains) {
+    	trainInfoArea.setText("");
         StringBuilder trainInfoText = new StringBuilder();
         for (Train train : trains) {
-            trainInfoText.append(String.format("Train %s: %s, %s\n", train.getId(), train.getPosition(), train.getStatus()));
+            trainInfoText.append(String.format("Train %s: %s\n", train.getId(), train.getPosition()));
         }
         trainInfoArea.setText(trainInfoText.toString());
+        System.out.println(trainInfoText);
     }
 }

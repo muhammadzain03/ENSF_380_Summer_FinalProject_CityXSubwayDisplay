@@ -45,6 +45,7 @@ public class MyApp3 extends JFrame implements ActionListener {
     private JButton stopButton;
     private Process process;
     private ExecutorService executor;
+    public boolean running = true;
 
     public MyApp3() {
         setTitle("Subway Screen 3");
@@ -53,6 +54,7 @@ public class MyApp3 extends JFrame implements ActionListener {
             public void windowClosing(WindowEvent e) {
                 stopProcess();
                 dispose();
+                running = false;
             }
         });
 
@@ -138,6 +140,7 @@ public class MyApp3 extends JFrame implements ActionListener {
             process = null;
             stopButton.setEnabled(false);
             startButton.setEnabled(true);
+            running = false;
         }
     }
 

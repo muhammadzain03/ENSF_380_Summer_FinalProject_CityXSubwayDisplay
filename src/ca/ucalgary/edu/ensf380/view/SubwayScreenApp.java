@@ -30,7 +30,7 @@ public class SubwayScreenApp {
             int trainNum = Integer.parseInt(args[0]) - 1;
             
             MyApp3.start();
-            new SubwayScreenGUI(trainNumber, city);
+            new SubwayScreenGUI(trainNumber, city, countryCode);
             
             ReadSimulatorOutput output = new ReadSimulatorOutput();
             ArrayList<Train> l = output.getTrains();

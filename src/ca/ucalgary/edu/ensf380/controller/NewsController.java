@@ -18,10 +18,10 @@ public class NewsController extends DataFetcherController {
     	this.newsPanel = newsPanel;
     }
     
-    public void retrieveNews () {
+    public void retrieveNews (String countryCode) {
     	new Thread(() -> {
             try {
-                String newsData = fetchData("https://newsapi.org/v2/top-headlines?country=" + "CA" + "&apiKey=" + API_KEY);
+                String newsData = fetchData("https://newsapi.org/v2/top-headlines?country=" + countryCode + "&apiKey=" + API_KEY);
 
                 Matcher myMatcher = NEWS_PATTERN.matcher(newsData);
                 

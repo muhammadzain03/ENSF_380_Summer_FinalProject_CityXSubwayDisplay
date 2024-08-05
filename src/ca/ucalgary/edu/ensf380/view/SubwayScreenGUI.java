@@ -27,7 +27,7 @@ public class SubwayScreenGUI {
     private NewsController newsController;
     
     
-    public SubwayScreenGUI(String trainNumber, String city) throws IOException {
+    public SubwayScreenGUI(String trainNumber, String city, String countryCode) throws IOException {
     	
     	this.advertisementPanel = new AdvertisementPanel();
     	this.weatherPanel = new WeatherPanel();
@@ -38,7 +38,7 @@ public class SubwayScreenGUI {
     	this.weatherController = new WeatherController(weatherPanel);
     	weatherController.retrieveWeather(city);
     	this.newsController = new NewsController(newsPanel);
-    	newsController.retrieveNews();
+    	newsController.retrieveNews(countryCode);
     	
     	EventQueue.invokeLater(() -> {
     		JFrame mainframe = new JFrame("Subway Screen - " + trainNumber);

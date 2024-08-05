@@ -20,7 +20,7 @@ import ca.ucalgary.edu.ensf380.model.Train;
 public class SubwayScreenApp {
 	
     public static void main(String[] args) throws IOException { 
-        if (args.length != 2) {
+        if (args.length != 3) {
             System.out.println("Usage: java SubwayScreenApp <train_number> <city> <country_code>");
         }else {
             String trainNumber = args[0];

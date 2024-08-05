@@ -15,6 +15,7 @@ public class SubwayScreenGUI {
     private WeatherPanel weatherPanel; 
     private NewsPanel newsPanel;
     private StationInfoPanel stationInfoPanel;
+    private MapPanel mapPanel;
    
     private AdvertisementController advertisementController;
     private WeatherController weatherController;
@@ -27,6 +28,7 @@ public class SubwayScreenGUI {
     	this.weatherPanel = new WeatherPanel();
     	this.newsPanel = new NewsPanel();
     	this.stationInfoPanel = new StationInfoPanel();
+    	this.mapPanel = new MapPanel();
     	
     	this.advertisementController = new AdvertisementController(advertisementPanel);
     	this.weatherController = new WeatherController(weatherPanel);
@@ -40,8 +42,12 @@ public class SubwayScreenGUI {
             mainframe.setLayout(new BorderLayout());
             mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             
+            JPanel adMapPanel = new JPanel(new CardLayout());
+            adMapPanel.add(advertisementPanel.getPanel());
+            adMapPanel.add(mapPanel.getPanel());
+            
             JPanel mainPanel = new JPanel(new BorderLayout());
-            mainPanel.add(advertisementPanel.getPanel(), BorderLayout.CENTER);
+            mainPanel.add(adMapPanel, BorderLayout.CENTER);
             mainPanel.add(weatherPanel.getPanel(), BorderLayout.EAST);
             mainframe.getContentPane().add(BorderLayout.CENTER, mainPanel);
             

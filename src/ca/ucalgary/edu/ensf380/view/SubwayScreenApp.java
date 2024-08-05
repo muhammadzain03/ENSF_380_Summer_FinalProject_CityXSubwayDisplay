@@ -48,91 +48,12 @@ public class SubwayScreenApp {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            	
 				output.readOutput();
 				ArrayList<Train> x = output.getTrains();
-				System.out.println(x.get(trainNum).getPosition());
+				System.out.println(x.get(trainNum).getPosition());				
 				
-				ArrayList<Station> stationList = stationController.getStations();
-				for(Station stations : stationList) {
-					String previousStation = null;
-					String nextStation = null;
-					String nextStation1 = null;
-					String nextStation2 = null;
-					
-					if (stations.getCode().equals(x.get(trainNum).getPosition())) {
-						System.out.println("Train T"+ x.get(trainNum).getId()+ " is at " + stations.getName() + " moving " + x.get(trainNum).getDirection());
-						String currentStation = stations.getName();
-						System.out.println(x.get(trainNum).getDirection());
-						if (x.get(trainNum).getDirection().equals("forward")) {
-							
-							int prevStationNumber = Integer.parseInt(stations.getNumber()) - 1;
-							String previousStationString = Integer.toString(prevStationNumber);
-							
-							int nextStationNumber = Integer.parseInt(stations.getNumber()) + 1;
-							String nextStationNumberString = String.valueOf(nextStationNumber);
-							
-							int nextStationNumber1 = Integer.parseInt(stations.getNumber()) + 2;
-							String nextStationNumberString1 = String.valueOf(nextStationNumber1);
-							
-							int nextStationNumber2 = Integer.parseInt(stations.getNumber()) + 3;
-							String nextStationNumberString2 = String.valueOf(nextStationNumber2);
-							System.out.println("inside IF");
-							for (Station station : stationList) {
-					            if (station.getNumber().equals(previousStationString)) {
-					                previousStation = station.getName();
-					                System.out.print(previousStation);
-					            }
-					            if (station.getNumber().equals(nextStationNumberString)) {
-					            	nextStation = station.getName();
-								}
-					            if (station.getNumber().equals(nextStationNumberString1)) {
-									 nextStation1 = station.getName();
-								}
-					            if (station.getNumber().equals(nextStationNumberString2)) {
-									 nextStation2 = station.getName();
-								}
-					            gui.getStationInfoPanel().updateTrainPosition(previousStation, currentStation, nextStation, nextStation1, nextStation2);
-					        }
-							
-						
-							
-							
-						} else if(x.get(trainNum).getDirection().equals("backward")){
-							int prevStationNumber = Integer.parseInt(stations.getNumber()) + 1;
-							String previousStationString = Integer.toString(prevStationNumber);
-							
-							int nextStationNumber = Integer.parseInt(stations.getNumber()) - 1;
-							String nextStationNumberString = String.valueOf(nextStationNumber);
-							
-							int nextStationNumber1 = Integer.parseInt(stations.getNumber()) - 2;
-							String nextStationNumberString1 = String.valueOf(nextStationNumber1);
-							
-							int nextStationNumber2 = Integer.parseInt(stations.getNumber()) - 3;
-							String nextStationNumberString2 = String.valueOf(nextStationNumber2);
-							System.out.println("inside IF");
-							for (Station station : stationList) {
-					            if (station.getNumber().equals(previousStationString)) {
-					                previousStation = station.getName();
-					                System.out.print(previousStation);
-					            }
-					            if (station.getNumber().equals(nextStationNumberString)) {
-					            	nextStation = station.getName();
-								}
-					            if (station.getNumber().equals(nextStationNumberString1)) {
-									 nextStation1 = station.getName();
-								}
-					            if (station.getNumber().equals(nextStationNumberString2)) {
-									 nextStation2 = station.getName();
-								}
-					            gui.getStationInfoPanel().updateTrainPosition(previousStation, currentStation, nextStation, nextStation1, nextStation2);
-					        }
-						}
-						
-						
-					}
-				}
-			
-				
+				stationController.updateTrainPos(trainNum, x, gui);
 				
 				
 			}
@@ -146,7 +67,6 @@ public class SubwayScreenApp {
 
     }
         
-
         
 
 

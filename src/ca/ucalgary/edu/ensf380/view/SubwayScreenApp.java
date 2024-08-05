@@ -33,7 +33,8 @@ public class SubwayScreenApp {
             int trainNum = Integer.parseInt(args[0]) - 1;
             
             MyApp3 app3 = new MyApp3();
-            new SubwayScreenGUI(trainNumber, city, countryCode);
+            SubwayScreenGUI	gui	= new SubwayScreenGUI(trainNumber, city, countryCode);
+            
             ReadSimulatorOutput output = new ReadSimulatorOutput();
             StationController stationController = new StationController();
             try {
@@ -90,11 +91,10 @@ public class SubwayScreenApp {
 					            if (station.getNumber().equals(nextStationNumberString2)) {
 									 nextStation2 = station.getName();
 								}
-					            StationInfoPanel.updateTrainPosition(previousStation, currentStation, nextStation, nextStation1, nextStation2);
+					            gui.stationInfoPanel.updateTrainPosition(previousStation, currentStation, nextStation, nextStation1, nextStation2);
 					        }
 							
 						
-							
 							
 							
 						} else if(x.get(trainNum).getDirection().equals("backward")){
@@ -124,7 +124,7 @@ public class SubwayScreenApp {
 					            if (station.getNumber().equals(nextStationNumberString2)) {
 									 nextStation2 = station.getName();
 								}
-					            StationInfoPanel.updateTrainPosition(previousStation, currentStation, nextStation, nextStation1, nextStation2);
+					            gui.stationInfoPanel.updateTrainPosition(previousStation, currentStation, nextStation, nextStation1, nextStation2);
 					        }
 						}
 						

@@ -14,7 +14,7 @@ public class SubwayScreenGUI {
 	private AdvertisementPanel advertisementPanel; 
     private WeatherPanel weatherPanel; 
     private NewsPanel newsPanel;
-    private StationInfoPanel stationInfoPanel;
+    public StationInfoPanel stationInfoPanel;
    
     private AdvertisementController advertisementController;
     private WeatherController weatherController;

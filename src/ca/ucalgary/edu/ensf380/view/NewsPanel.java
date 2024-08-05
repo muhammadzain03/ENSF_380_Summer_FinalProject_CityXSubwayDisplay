@@ -11,14 +11,13 @@ public class NewsPanel{
     private JLabel newsLabel;
     private Timer timer;
 
-    public NewsPanel() throws IOException {
+    public NewsPanel() {
     	this.panel = new JPanel(new BorderLayout());
     	panel.setPreferredSize(new Dimension(800, 50));
     	this.newsLabel = new JLabel("Loading news...", SwingConstants.CENTER);
     	newsLabel.setFont(new Font("Arial", Font.PLAIN, 20));
     	this.timer = new Timer(100, e -> scrollNews());
     	timer.start();
-        //this.articles = new ArrayList<>();
         panel.add(newsLabel, BorderLayout.CENTER);
 
     }

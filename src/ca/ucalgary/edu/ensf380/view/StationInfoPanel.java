@@ -7,12 +7,11 @@ import java.awt.*;
 
 public class StationInfoPanel {
 	private JPanel panel;
-    private static JLabel[] stationLabel;
+    private static JLabel[] stationLabel = new JLabel[5];
 
     public StationInfoPanel() {
     	this.panel = new JPanel(new GridLayout(1, 5));
-    	panel.setPreferredSize(new Dimension(800, 100));
-    	this.stationLabel = new JLabel[5];
+    	panel.setPreferredSize(new Dimension(800, 100)); 
     	for (int i = 0; i < 5; i++) {
     		stationLabel[i] = new JLabel("Next stations: Fetching...", SwingConstants.CENTER);
             panel.add(stationLabel[i]);

@@ -15,13 +15,13 @@ public class SubwayScreenGUI {
     private WeatherPanel weatherPanel; 
     private NewsPanel newsPanel;
     private StationInfoPanel stationInfoPanel;
-    
+   
     private AdvertisementController advertisementController;
     private WeatherController weatherController;
     private NewsController newsController;
     
     
-    public SubwayScreenGUI(String trainNumber, String city, String countryCode) throws IOException {
+    public SubwayScreenGUI(String trainNumber, String city, String countryCode) {
     	
     	this.advertisementPanel = new AdvertisementPanel();
     	this.weatherPanel = new WeatherPanel();

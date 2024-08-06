@@ -15,6 +15,7 @@ public class StationController {
 	private static ArrayList<Station> stations = new ArrayList<Station>();
     
 	public String nextStationNum; 
+	public String currentStation;
 	
     public StationController() {
     	populateStation();
@@ -79,7 +80,7 @@ public class StationController {
 			
 			if (stations.getCode().equals(x.get(trainNum).getPosition())) {
 				System.out.println("Train T"+ x.get(trainNum).getId()+ " is at " + stations.getName() + " moving " + x.get(trainNum).getDirection());
-				String currentStation = stations.getName();
+				 currentStation = stations.getName();
 				System.out.println(x.get(trainNum).getDirection());
 				if (x.get(trainNum).getDirection().equals("forward")) {
 					

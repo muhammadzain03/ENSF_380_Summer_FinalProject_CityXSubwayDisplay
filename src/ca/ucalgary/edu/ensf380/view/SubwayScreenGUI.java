@@ -36,7 +36,7 @@ public class SubwayScreenGUI {
     	this.weatherPanel = new WeatherPanel();
     	this.newsPanel = new NewsPanel();
     	this.stationInfoPanel = new StationInfoPanel();
-    	this.mapPanel = new MapPanel(stations);
+    	this.mapPanel = new MapPanel(stations, trainNumber);
         this.cardLayout = new CardLayout();
         this.adMapPanel = new JPanel(cardLayout);
     	

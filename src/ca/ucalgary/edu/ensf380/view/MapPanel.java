@@ -32,10 +32,10 @@ public class MapPanel extends JPanel {
         super.paintComponent(g);
         
         for (Station station : stations) {
-            int x = (int) station.getX()/2; // Assuming getX() and getY() methods in Station class
+            int x = (int) station.getX()/2;
             int y = (int) station.getY()/2;
             
-            // Example: Draw a filled circle at each station location
+          
             String stationNumber = station.getCode();
             
             if (stationNumber.startsWith("R")) {
@@ -54,12 +54,16 @@ public class MapPanel extends JPanel {
         		String stationCode = station.getCode();
         		String trainCode = trainData.getPosition();
         		if (stationCode.equals(trainCode)) {
-        			 int x = (int) station.getX()/2; // Assuming getX() and getY() methods in Station class
+        			 int x = (int) station.getX()/2; 
         	         int y = (int) station.getY()/2;
-        	         
+        	         if (trainNum.equals(trainData.getId())) {
+						g.setColor(Color.CYAN);
+						 g.fillOval(x, y, 14, 14);
+					}else {
         	         
         	         g.setColor(Color.BLACK);
-        	         g.fillOval(x, y, 10, 10);
+        	         g.fillOval(x, y, 14, 14);
+					}
 				}
         		
         		
@@ -71,17 +75,17 @@ public class MapPanel extends JPanel {
     }
     public void setStations(ArrayList<Station> stations) {
         this.stations = stations;
-        repaint(); // Trigger repaint to update the panel
+        repaint(); 
     }
     
     public void setTrains() {
         ReadSimulatorOutput output = new ReadSimulatorOutput();
         output.readOutput();
         trainInfo = output.getTrains();
-        repaint(); // Trigger repaint to update the panel
+        repaint();
     }
 
-    // Example method to update points if needed
+   
     
     public JPanel getPanel() {
 		return this;

@@ -28,9 +28,9 @@ public class StationController {
 	}
     
     private void populateStation() {
-    	String folderPath = "./Map/Map.csv"; // Replace with your folder path
+    	String folderPath = "./Map/Map.csv"; 
     	
-    	// List all files in the directory
+
     	File folder = new File(folderPath);
     	
     	
@@ -40,17 +40,15 @@ public class StationController {
     		String line;
     		
     		if ((line = br.readLine()) != null) {
-    			// Ignored header line
+    			
     		}
     		while ((line = br.readLine()) != null) {
-    			// Process each line (assuming CSV format)
-    			// Move to the next line for the next CSV row
+    			
     			String[] values = line.split(",");
     			
     			
-    			//System.out.println(values[3] +" " +  values[4]);
+    			
     			setStations(values[4], values[3],values[0], Double.valueOf(values[5]) ,  Double.valueOf(values[6]) );
-    			// Example: print each value in the CSV
     			
     			
     		}

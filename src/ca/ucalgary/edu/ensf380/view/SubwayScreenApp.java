@@ -39,18 +39,9 @@ public class SubwayScreenApp {
             ReadSimulatorOutput output = new ReadSimulatorOutput();
             StationController stationController = new StationController();
             SubwayScreenGUI	gui	= new SubwayScreenGUI(trainNumber, city, countryCode, stationController.getStations());
-//            try {
-//                Thread.sleep(5000); // 5000 milliseconds = 5 seconds
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+
             while (app3.running != false) {
-//            	try {
-//                    Thread.sleep(13000); 
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-            	
+
 				output.readOutput();
 				ArrayList<Train> x = output.getTrains();
 				System.out.println(x.get(trainNum).getPosition());				
@@ -60,10 +51,9 @@ public class SubwayScreenApp {
 				
 				String audioFolder = "./audio/";
 
-		        // Construct the full path to the audio file
 		        String audioFilePath = audioFolder + lolString.trim() +".mp3";
 
-		        // Create a Media object
+		  
 		        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(audioFilePath))) {
 		            AdvancedPlayer player = new AdvancedPlayer(bis);
 		            player.play();

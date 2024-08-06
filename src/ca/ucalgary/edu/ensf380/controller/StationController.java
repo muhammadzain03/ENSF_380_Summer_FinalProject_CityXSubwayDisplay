@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 import ca.ucalgary.edu.ensf380.model.Station;
@@ -13,6 +14,8 @@ import ca.ucalgary.edu.ensf380.view.SubwayScreenGUI;
 public class StationController {
 	private static ArrayList<Station> stations = new ArrayList<Station>();
     
+	public String nextStationNum; 
+	
     public StationController() {
     	populateStation();
     	
@@ -67,11 +70,12 @@ public class StationController {
     public void updateTrainPos(int trainNum, ArrayList<Train> x, SubwayScreenGUI gui) {
  
     	 ArrayList<Station> stationList = getStations();
+    	 String previousStation = null;
+    	 String nextStation = null;
+    	 String nextStation1 = null;
+    	 String nextStation2 = null;
 		for(Station stations : stationList) {
-			String previousStation = null;
-			String nextStation = null;
-			String nextStation1 = null;
-			String nextStation2 = null;
+			
 			
 			if (stations.getCode().equals(x.get(trainNum).getPosition())) {
 				System.out.println("Train T"+ x.get(trainNum).getId()+ " is at " + stations.getName() + " moving " + x.get(trainNum).getDirection());
@@ -98,7 +102,8 @@ public class StationController {
 			            }
 			            if (station.getNumber().equals(nextStationNumberString)) {
 			            	nextStation = station.getName();
-						}
+			            	nextStationNum = station.getCode();		
+			            	}
 			            if (station.getNumber().equals(nextStationNumberString1)) {
 							 nextStation1 = station.getName();
 						}

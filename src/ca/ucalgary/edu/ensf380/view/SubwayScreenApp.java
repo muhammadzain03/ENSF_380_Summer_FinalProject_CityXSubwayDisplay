@@ -1,7 +1,10 @@
  package ca.ucalgary.edu.ensf380.view;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,9 +12,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.sound.midi.SysexMessage;
-import javax.swing.table.TableStringConverter;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.advanced.AdvancedPlayer;
 
 import ca.ucalgary.edu.ensf380.MyApp3;
 import ca.ucalgary.edu.ensf380.controller.ReadSimulatorOutput;
@@ -54,8 +56,26 @@ public class SubwayScreenApp {
 				System.out.println(x.get(trainNum).getPosition());				
 				
 				stationController.updateTrainPos(trainNum, x, gui);
+				String lolString = stationController.nextStationNum;
 				
-				
+				String audioFolder = "./audio/";
+
+		        // Construct the full path to the audio file
+		        String audioFilePath = audioFolder + lolString.trim() +".mp3";
+
+		        // Create a Media object
+		        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(audioFilePath))) {
+		            AdvancedPlayer player = new AdvancedPlayer(bis);
+		            player.play();
+		        } catch (FileNotFoundException e) {
+		            System.err.println("File not found: " + audioFilePath);
+		        } catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (JavaLayerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
             
             

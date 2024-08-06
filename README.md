@@ -13,5 +13,5 @@ Steps to Run Program:
 
         for example: java SubwayScreenApp 1 Calgary CA
 To stop the program:
-    either close the main gui or the simulator gui.
+    CLose the main program.
 

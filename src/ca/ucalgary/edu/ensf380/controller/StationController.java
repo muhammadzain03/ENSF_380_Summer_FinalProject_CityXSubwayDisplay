@@ -136,6 +136,7 @@ public class StationController {
 			            }
 			            if (station.getNumber().equals(nextStationNumberString)) {
 			            	nextStation = station.getName();
+			            	nextStationNum = station.getCode();	
 						}
 			            if (station.getNumber().equals(nextStationNumberString1)) {
 							 nextStation1 = station.getName();

@@ -39,17 +39,17 @@ public class SubwayScreenApp {
             
             ReadSimulatorOutput output = new ReadSimulatorOutput();
             StationController stationController = new StationController();
-            try {
-                Thread.sleep(5000); // 5000 milliseconds = 5 seconds
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(5000); // 5000 milliseconds = 5 seconds
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             while (app3.running != false) {
-            	try {
-                    Thread.sleep(15000); 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//            	try {
+//                    Thread.sleep(13000); 
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
             	
 				output.readOutput();
 				ArrayList<Train> x = output.getTrains();
@@ -76,6 +76,12 @@ public class SubwayScreenApp {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		        try {
+                    Thread.sleep(13000); 
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+		        
 			}
             
             

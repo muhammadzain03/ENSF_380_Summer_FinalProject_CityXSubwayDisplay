@@ -16,22 +16,22 @@ public class ReadSimulatorOutput {
 	private static ArrayList<Train> trains = new ArrayList<Train>();
 
 	public ReadSimulatorOutput() {
-		String folderPath = "./out"; 
-		File folder = new File(folderPath);
-	    File[] listOfFiles = folder.listFiles();
-
-	    // Delete existing files
-	    if (listOfFiles != null) {
-	        for (File file : listOfFiles) {
-	            if (file.isFile()) {
-	                if (file.delete()) {
-	                    System.out.println("Deleted file: " + file.getName());
-	                } else {
-	                    System.out.println("Failed to delete file: " + file.getName());
-	                }
-	            }
-	        }
-	    }
+//		String folderPath = "./out"; 
+//		File folder = new File(folderPath);
+//	    File[] listOfFiles = folder.listFiles();
+//
+//	    // Delete existing files
+//	    if (listOfFiles != null) {
+//	        for (File file : listOfFiles) {
+//	            if (file.isFile()) {
+//	                if (file.delete()) {
+//	                    System.out.println("Deleted file: " + file.getName());
+//	                } else {
+//	                    System.out.println("Failed to delete file: " + file.getName());
+//	                }
+//	            }
+//	        }
+//	    }
 	
 		
 	}

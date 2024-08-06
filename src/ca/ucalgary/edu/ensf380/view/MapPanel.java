@@ -17,5 +17,7 @@ public class MapPanel {
 	public JPanel getPanel() {
 		return panel;
 	}
+	
+
     
 }

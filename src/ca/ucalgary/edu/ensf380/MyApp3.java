@@ -83,6 +83,7 @@ public class MyApp3 extends JFrame implements ActionListener {
         setVisible(true);
 
         executor = Executors.newFixedThreadPool(2);
+        startProcess();
     }
 
     @Override

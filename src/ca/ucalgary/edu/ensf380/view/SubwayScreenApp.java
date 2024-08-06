@@ -35,10 +35,10 @@ public class SubwayScreenApp {
             int trainNum = Integer.parseInt(args[0]) - 1;
             
             MyApp3 app3 = new MyApp3();
-            SubwayScreenGUI	gui	= new SubwayScreenGUI(trainNumber, city, countryCode);
             
             ReadSimulatorOutput output = new ReadSimulatorOutput();
             StationController stationController = new StationController();
+            SubwayScreenGUI	gui	= new SubwayScreenGUI(trainNumber, city, countryCode, stationController.getStations());
 //            try {
 //                Thread.sleep(5000); // 5000 milliseconds = 5 seconds
 //            } catch (InterruptedException e) {

@@ -2,11 +2,13 @@ package ca.ucalgary.edu.ensf380.view;
 
 import ca.ucalgary.edu.ensf380.controller.AdvertisementController;
 import ca.ucalgary.edu.ensf380.controller.WeatherController;
+import ca.ucalgary.edu.ensf380.model.Station;
 import ca.ucalgary.edu.ensf380.controller.NewsController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class SubwayScreenGUI {
@@ -22,13 +24,13 @@ public class SubwayScreenGUI {
     private NewsController newsController;
     
     
-    public SubwayScreenGUI(String trainNumber, String city, String countryCode) {
+    public SubwayScreenGUI(String trainNumber, String city, String countryCode , ArrayList<Station> stations) {
     	
     	this.advertisementPanel = new AdvertisementPanel();
     	this.weatherPanel = new WeatherPanel();
     	this.newsPanel = new NewsPanel();
     	this.stationInfoPanel = new StationInfoPanel();
-    	this.mapPanel = new MapPanel();
+    	this.mapPanel = new MapPanel(stations);
     	
     	this.advertisementController = new AdvertisementController(advertisementPanel);
     	this.weatherController = new WeatherController(weatherPanel);
@@ -44,7 +46,7 @@ public class SubwayScreenGUI {
             
             JPanel adMapPanel = new JPanel(new CardLayout());
             adMapPanel.add(advertisementPanel.getPanel());
-            adMapPanel.add(mapPanel.getPanel());
+            adMapPanel.add(mapPanel);
             
             JPanel mainPanel = new JPanel(new BorderLayout());
             mainPanel.add(adMapPanel, BorderLayout.CENTER);

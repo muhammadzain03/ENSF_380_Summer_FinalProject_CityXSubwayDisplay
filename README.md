@@ -12,5 +12,6 @@ Steps to Run Program:
         java SubwayScreenApp <train_number> <city> <country_code>
 
         for example: java SubwayScreenApp 1 Calgary CA
-
+To stop the program:
+    either close the main gui or the simulator gui.
 

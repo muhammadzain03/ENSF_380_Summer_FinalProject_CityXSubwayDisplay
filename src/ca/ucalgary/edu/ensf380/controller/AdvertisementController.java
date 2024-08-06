@@ -1,77 +1,96 @@
 package ca.ucalgary.edu.ensf380.controller;
 
-import ca.ucalgary.edu.ensf380.model.Advertisement;
-import ca.ucalgary.edu.ensf380.util.DatabaseUtil;
 import ca.ucalgary.edu.ensf380.view.AdvertisementPanel;
+import ca.ucalgary.edu.ensf380.util.DatabaseUtil;
 
 import java.sql.*;
 import java.util.*;
 
 public class AdvertisementController {
-    private List<Advertisement> advertisements; 	// List to store advertisements
-    private int currentAdIndex = 0; 				// Index to track the current advertisement
-    private Timer timer; 							// Timer to schedule ad rotation
-    private AdvertisementPanel advertisementPanel; 	// Reference to the "AdvertisementPanel.java"
-
-    // Constructor to initialize the AdvertisementController
+    private List<Map<String, Object>> advertisements;
+    private int currentAdIndex = 0;
+    private Timer timer;
+    private AdvertisementPanel advertisementPanel;
+    
     public AdvertisementController(AdvertisementPanel advertisementPanel) {
-        this.advertisementPanel = advertisementPanel;	// Assign the AdvertisementPanel reference
+        this.advertisementPanel = advertisementPanel;
         try {
-            this.advertisements = loadAds(); // Load advertisements from the database
+            this.advertisements = loadAds();
         } catch (SQLException e) {
             System.out.println("Error loading advertisements from the database: " + e.getMessage());
             this.advertisements = new ArrayList<>(); // Initialize to an empty list if loading fails
         }
-        startAdRotation(); // Start rotating the advertisements
+        startAdRotation();
     }
 
     // Method to load advertisements from the database
-    public List<Advertisement> loadAds() throws SQLException {
-        List<Advertisement> ads = new ArrayList<>();	// Initialize the list of advertisements
-        String query = "SELECT * FROM advertisements";	// SQL query to select all advertisements
-        DatabaseUtil dbUtil = new DatabaseUtil();		// Reference to "DatabaseUtil.java" to handle database operations
-        
-        try {
-            dbUtil.createConnection(); // Connect to the database - called from "DatabaseUtil.java"
-            ResultSet resultSet = dbUtil.selectQuery(query);	// Execute the query and get the result set
+    public List<Map<String, Object>> loadAds() throws SQLException {
+        List<Map<String, Object>> ads = new ArrayList<>();
+        String query = "SELECT * FROM advertisements";
+        DatabaseUtil dbUtil = new DatabaseUtil();
 
-            // Iterate through the result set and create Advertisement objects
+        try {
+            dbUtil.createConnection();
+            ResultSet resultSet = dbUtil.selectQuery(query);
+
             while (resultSet.next()) {
-                Advertisement ad = new Advertisement(
-                    resultSet.getInt("id"),
-                    resultSet.getString("media_type"),
-                    resultSet.getString("media_path"),
-                    resultSet.getInt("display_duration")
-                );
-                ads.add(ad); // Add the advertisement to the list
+                Map<String, Object> ad = new HashMap<>();
+                ad.put("id", resultSet.getInt("id"));
+                ad.put("media_type", resultSet.getString("media_type"));
+                ad.put("media_path", resultSet.getString("media_path"));
+                ad.put("display_duration", resultSet.getInt("display_duration"));
+                ads.add(ad);
             }
         } finally {
-            dbUtil.close(); // Close the database connection
+            dbUtil.close();
         }
         return ads;
-        // Return the list of advertisements
     }
 
     // Method to start rotating advertisements
-    private void startAdRotation() {
-        timer = new Timer();	// Initialize the timer
+    public void startAdRotation() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-            	// Check if there are advertisements and the current index is within bounds
                 if (advertisements != null && !advertisements.isEmpty()) {
-                    Advertisement ad = advertisements.get(currentAdIndex);	// Get the current advertisement
-                    advertisementPanel.displayAdvertisement(ad); 			// Display the current advertisement
-                    currentAdIndex = (currentAdIndex + 1) % advertisements.size();	// Increment and wrap the index
+                    Map<String, Object> ad = advertisements.get(currentAdIndex);
+                    advertisementPanel.displayAdvertisement(ad);
+                    currentAdIndex = (currentAdIndex + 1) % advertisements.size();
+                    pauseAd(); // Pause after displaying the ad
                 }
             }
-        }, 0, 10000); // Rotate ads every 10 seconds
+        }, 0);
+    }
+
+    // Method to pause advertisement rotation
+    private void pauseAd() {
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                advertisementPanel.displayAdvertisement(null); // Clear the ad during pause
+                resumeAd(); // Resume after pause
+            }
+        }, 10000); // Display ad for 10 seconds
+    }
+
+    // Method to resume advertisement rotation
+    private void resumeAd() {
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                startAdRotation(); // Schedule the next ad
+            }
+        }, 5000); // Pause for 5 seconds
     }
 
     // Method to stop the advertisement rotation
     public void stopAdRotation() {
         if (timer != null) {
-            timer.cancel(); // Cancel the timer if it is not null
+            timer.cancel();
         }
     }
 }

@@ -1,14 +1,16 @@
 package ca.ucalgary.edu.ensf380.view;
 
+import ca.ucalgary.edu.ensf380.model.Station;
 import ca.ucalgary.edu.ensf380.controller.AdvertisementController;
 import ca.ucalgary.edu.ensf380.controller.WeatherController;
-import ca.ucalgary.edu.ensf380.model.Station;
 import ca.ucalgary.edu.ensf380.controller.NewsController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class SubwayScreenGUI {
@@ -23,15 +25,22 @@ public class SubwayScreenGUI {
     private WeatherController weatherController;
     private NewsController newsController;
     
+    private Timer displayTimer;
+    private JPanel adMapPanel;
+    private CardLayout cardLayout;
     
-    public SubwayScreenGUI(String trainNumber, String city, String countryCode , ArrayList<Station> stations) {
+    
+    public SubwayScreenGUI(String trainNumber, String city, String countryCode, ArrayList<Station> stations) {
     	
     	this.advertisementPanel = new AdvertisementPanel();
     	this.weatherPanel = new WeatherPanel();
     	this.newsPanel = new NewsPanel();
     	this.stationInfoPanel = new StationInfoPanel();
     	this.mapPanel = new MapPanel(stations);
+        this.cardLayout = new CardLayout();
+        this.adMapPanel = new JPanel(cardLayout);
     	
+    
     	this.advertisementController = new AdvertisementController(advertisementPanel);
     	this.weatherController = new WeatherController(weatherPanel);
     	weatherController.retrieveWeather(city);
@@ -43,10 +52,9 @@ public class SubwayScreenGUI {
     		mainframe.setSize(1000, 600);
             mainframe.setLayout(new BorderLayout());
             mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            
-            JPanel adMapPanel = new JPanel(new CardLayout());
-            adMapPanel.add(advertisementPanel.getPanel());
-            adMapPanel.add(mapPanel);
+
+            adMapPanel.add(advertisementPanel.getPanel(), "AdvertisementPanel");
+            adMapPanel.add(mapPanel.getPanel(), "MapPanel");
             
             JPanel mainPanel = new JPanel(new BorderLayout());
             mainPanel.add(adMapPanel, BorderLayout.CENTER);
@@ -59,11 +67,34 @@ public class SubwayScreenGUI {
             mainframe.getContentPane().add(BorderLayout.SOUTH, bottomPanel);          
             
             mainframe.setVisible(true);
+            startDisplayTimer();
+            
     	});
+    	
+    }
+    
+    private void startDisplayTimer() {
+        displayTimer = new Timer(10000, new ActionListener() {
+            private boolean showingAd = true;
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (showingAd) {
+                    cardLayout.show(adMapPanel, "MapPanel");
+                    advertisementController.resumeAd();
+                } else {
+                    cardLayout.show(adMapPanel, "AdvertisementPanel");
+                    advertisementController.pauseAd();
+                }
+                showingAd = !showingAd;
+            }
+        });
+        displayTimer.start();
     }
     
     public StationInfoPanel getStationInfoPanel() {
     	return stationInfoPanel;
     }
 }
+
 

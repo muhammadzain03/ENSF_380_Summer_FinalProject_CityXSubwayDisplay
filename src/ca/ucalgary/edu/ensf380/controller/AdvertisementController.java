@@ -60,25 +60,24 @@ public class AdvertisementController {
                     Map<String, Object> ad = advertisements.get(currentAdIndex);
                     advertisementPanel.displayAdvertisement(ad);
                     currentAdIndex = (currentAdIndex + 1) % advertisements.size();
-                    pauseAd(); // Pause after displaying the ad
+                     // Pause after displaying the ad
                 }
             }
         }, 0);
     }
 
     // Method to pause advertisement rotation
-    private void pauseAd() {
+    public void pauseAd() {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 advertisementPanel.displayAdvertisement(null); // Clear the ad during pause
-                resumeAd(); // Resume after pause
             }
         }, 10000); // Display ad for 10 seconds
     }
 
     // Method to resume advertisement rotation
-    private void resumeAd() {
+    public void resumeAd() {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {

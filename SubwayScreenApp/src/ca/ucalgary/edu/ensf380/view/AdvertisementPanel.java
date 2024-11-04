@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class AdvertisementPanel {
     private static final String BASE_PATH = "advertisements/";
-    private JPanel panel;
-    private JLabel adLabel;
+    private final JPanel panel;
+    private final JLabel adLabel;
 
     public AdvertisementPanel() {
         this.panel = new JPanel(new BorderLayout());
@@ -19,6 +19,11 @@ public class AdvertisementPanel {
         return panel;
     }
 
+    /**
+     * Displays the advertisement on the panel.
+     *
+     * @param ad a Map containing advertisement details, or null to clear the display
+     */
     public void displayAdvertisement(Map<String, Object> ad) {
         if (ad == null) {
             adLabel.setIcon(null);

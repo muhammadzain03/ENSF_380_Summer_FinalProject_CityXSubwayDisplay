@@ -9,7 +9,7 @@ public class SubwayLine {
 
     public SubwayLine(String name) {
         this.name = name;
-        this.stations = new ArrayList<>(); // Initialize the stations list
+        this.stations = new ArrayList<>();
     }
 
     public SubwayLine(List<Station> stations) {

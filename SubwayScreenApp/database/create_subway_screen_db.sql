@@ -1,8 +1,7 @@
-DROP TABLE IF EXISTS advertisements;
-
 CREATE DATABASE IF NOT EXISTS subway_screen;
-
 USE subway_screen;
+
+DROP TABLE IF EXISTS advertisements;
 
 CREATE TABLE IF NOT EXISTS advertisements (
     id INT AUTO_INCREMENT PRIMARY KEY,

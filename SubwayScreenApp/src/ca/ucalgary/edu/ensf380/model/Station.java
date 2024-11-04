@@ -4,24 +4,21 @@ public class Station {
     private String name;
     private String code;
     private String number;
-	private double x;
-	private double y;
+    private double x;
+    private double y;
 
-    public Station(String name, String code , String number, double x, double y) {
+    public Station(String name, String code, String number, double x, double y) {
         this.name = name;
         this.code = code;
         this.number = number;
         this.x = x;
         this.y = y;
-      
     }
     
-    public Station(String name, String code , String number) {
+    public Station(String name, String code, String number) {
         this.name = name;
         this.code = code;
         this.number = number;
-       
-      
     }
 
     public String getName() {

@@ -10,7 +10,7 @@ public class AdvertisementController {
     private List<Map<String, Object>> advertisements;
     private int currentAdIndex = 0;
     private Timer timer;
-    private AdvertisementPanel advertisementPanel;
+    private final AdvertisementPanel advertisementPanel;
     
     public AdvertisementController(AdvertisementPanel advertisementPanel) {
         this.advertisementPanel = advertisementPanel;
@@ -23,8 +23,13 @@ public class AdvertisementController {
         startAdRotation();
     }
 
-    // Method to load advertisements from the database
-    public List<Map<String, Object>> loadAds() throws SQLException {
+    /**
+     * Loads advertisements from the database.
+     *
+     * @return List of advertisements with each ad represented as a Map
+     * @throws SQLException if there is a database access error
+     */
+    private List<Map<String, Object>> loadAds() throws SQLException {
         List<Map<String, Object>> ads = new ArrayList<>();
         String query = "SELECT * FROM advertisements";
         DatabaseUtil dbUtil = new DatabaseUtil();
@@ -47,7 +52,9 @@ public class AdvertisementController {
         return ads;
     }
 
-    // Method to start rotating advertisements
+    /**
+     * Starts rotating advertisements by scheduling a timer task.
+     */
     public void startAdRotation() {
         if (timer != null) {
             timer.cancel();
@@ -60,33 +67,42 @@ public class AdvertisementController {
                     Map<String, Object> ad = advertisements.get(currentAdIndex);
                     advertisementPanel.displayAdvertisement(ad);
                     currentAdIndex = (currentAdIndex + 1) % advertisements.size();
-                     // Pause after displaying the ad
                 }
             }
         }, 0);
     }
 
-    // Method to pause advertisement rotation
+    /**
+     * Pauses the advertisement rotation for 10 seconds by clearing the ad display.
+     */
     public void pauseAd() {
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                advertisementPanel.displayAdvertisement(null); // Clear the ad during pause
-            }
-        }, 10000); // Display ad for 10 seconds
+        if (timer != null) {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    advertisementPanel.displayAdvertisement(null); // Clear the ad during pause
+                }
+            }, 10000); // Display ad for 10 seconds
+        }
     }
 
-    // Method to resume advertisement rotation
+    /**
+     * Resumes the advertisement rotation after a 5-second pause.
+     */
     public void resumeAd() {
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                startAdRotation(); // Schedule the next ad
-            }
-        }, 5000); // Pause for 5 seconds
+        if (timer != null) {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    startAdRotation(); // Schedule the next ad
+                }
+            }, 5000); // Pause for 5 seconds
+        }
     }
 
-    // Method to stop the advertisement rotation
+    /**
+     * Stops the advertisement rotation and cancels the timer.
+     */
     public void stopAdRotation() {
         if (timer != null) {
             timer.cancel();
